@@ -1,0 +1,34 @@
+<x-app-layout>
+    <!-- Amazon-style Hero Background -->
+    <div class="relative bg-gray-200">
+        <!-- Background Image/Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-100 h-[400px]"></div>
+
+        <!-- Hero Content (Carousel Placeholder) -->
+        <div class="relative max-w-[1500px] mx-auto h-[400px] flex items-center px-4">
+            <div class="space-y-4 max-w-lg z-10 p-8 rounded-lg">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">
+                    Professional gear for <br /> <span class="text-[#fa8900]">serious builders.</span>
+                </h1>
+                <p class="text-lg text-gray-700 font-medium">
+                    Millions of products, fast delivery, and pro-exclusive deals.
+                </p>
+                <button
+                    class="bg-[#fa8900] hover:bg-[#e87f00] text-white px-8 py-3 rounded-full font-bold shadow-md transition-transform transform hover:scale-105">
+                    Start Shopping
+                </button>
+            </div>
+            <!-- Decorative Hero Image -->
+            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop"
+                class="absolute right-0 top-0 h-full w-1/2 object-cover opacity-50 mask-image-gradient" alt="Hero">
+
+            <!-- Gradient Overlay for smooth transition to content -->
+            <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-slate-50 to-transparent"></div>
+        </div>
+    </div>
+
+    <!-- Main Content Grid (Overlapping Hero) -->
+    <div class="max-w-[1600px] mx-auto px-4 -mt-24 relative z-20 pb-12">
+        <livewire:product-showcase />
+    </div>
+</x-app-layout>
