@@ -1,5 +1,5 @@
 <x-app-layout>
-    <!-- Amazon-style Hero Background -->
+    <!-- 100X-style Hero Background -->
     <div class="relative bg-gray-200">
         <!-- Background Image/Gradient -->
         <div class="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-100 h-[400px]"></div>
@@ -19,8 +19,9 @@
                 </button>
             </div>
             <!-- Decorative Hero Image -->
-            <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1000&auto=format&fit=crop"
-                class="absolute right-0 top-0 h-full w-1/2 object-cover opacity-50 mask-image-gradient" alt="Hero">
+            <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=1000&auto=format&fit=crop"
+                class="absolute right-0 top-0 h-full w-1/2 object-cover opacity-50 mask-image-gradient"
+                alt="Samsung Galaxy Phone">
 
             <!-- Gradient Overlay for smooth transition to content -->
             <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-slate-50 to-transparent"></div>

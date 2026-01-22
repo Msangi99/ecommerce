@@ -2,6 +2,64 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 class="text-3xl font-bold text-slate-900 mb-8">Checkout</h1>
 
+        @if(session('error'))
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 mb-6" x-data="{ show: true }" x-show="show">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <p class="text-sm font-medium text-red-800">
+                            {{ session('error') }}
+                        </p>
+                    </div>
+                    <div class="ml-auto pl-3">
+                        <button @click="show = false"
+                            class="inline-flex rounded-md bg-red-50 p-1.5 text-red-500 hover:bg-red-100 focus:outline-none focus:ring-2 focus:ring-red-600 focus:ring-offset-2 focus:ring-offset-red-50">
+                            <span class="sr-only">Dismiss</span>
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if(session('success'))
+            <div class="bg-green-50 border-l-4 border-green-500 p-4 mb-6" x-data="{ show: true }" x-show="show">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <p class="text-sm font-medium text-green-800">
+                            {{ session('success') }}
+                        </p>
+                    </div>
+                    <div class="ml-auto pl-3">
+                        <button @click="show = false"
+                            class="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50">
+                            <span class="sr-only">Dismiss</span>
+                            <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <path
+                                    d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        @endif
+
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-8">
                 <form id="checkout-form" action="{{ route('checkout.store') }}" method="POST">
@@ -67,14 +125,59 @@
                         </div>
                     </div>
 
-                    <div class="bg-white shadow-sm sm:rounded-lg border border-slate-200 p-6 mb-6">
+                    <div class="bg-white shadow-sm sm:rounded-lg border border-slate-200 p-6 mb-6"
+                        x-data="{ paymentMethod: 'cod' }">
                         <h2 class="text-lg font-medium text-slate-900 mb-4">2. Payment Method</h2>
-                        <div class="flex items-center p-4 border rounded-lg bg-slate-50">
-                            <input id="payment-cod" name="payment_method" type="radio" value="cod" checked
-                                class="focus:ring-[#fa8900] h-4 w-4 text-[#fa8900] border-gray-300">
-                            <label for="payment-cod" class="ml-3 block text-sm font-medium text-slate-900">
-                                Cash on Delivery (COD)
-                            </label>
+
+                        <div class="space-y-4">
+                            <!-- COD Option -->
+                            <div class="flex items-center p-4 border rounded-lg hover:bg-slate-50 cursor-pointer"
+                                :class="{ 'bg-orange-50 ring-1 ring-[#fa8900] border-[#fa8900]': paymentMethod === 'cod' }">
+                                <input id="payment-cod" name="payment_method" type="radio" value="cod"
+                                    x-model="paymentMethod"
+                                    class="focus:ring-[#fa8900] h-4 w-4 text-[#fa8900] border-gray-300">
+                                <label for="payment-cod"
+                                    class="ml-3 block text-sm font-medium text-slate-900 w-full cursor-pointer">
+                                    Cash on Delivery (COD)
+                                </label>
+                            </div>
+
+                            <!-- Selcom Option -->
+                            <div class="flex items-start p-4 border rounded-lg hover:bg-slate-50 cursor-pointer"
+                                :class="{ 'bg-orange-50 ring-1 ring-[#fa8900] border-[#fa8900]': paymentMethod === 'selcom' }">
+                                <div class="flex items-center h-5">
+                                    <input id="payment-selcom" name="payment_method" type="radio" value="selcom"
+                                        x-model="paymentMethod"
+                                        class="focus:ring-[#fa8900] h-4 w-4 text-[#fa8900] border-gray-300">
+                                </div>
+                                <div class="ml-3 text-sm w-full">
+                                    <label for="payment-selcom" class="font-medium text-slate-900 block cursor-pointer">
+                                        Selcom / Mobile Money
+                                    </label>
+                                    <p class="text-slate-500">Pay securely with M-Pesa, Tigo Pesa, Airtel Money, or
+                                        HaloPesa.</p>
+
+                                    <!-- Phone Number Input (Only shown if Selcom is selected) -->
+                                    <div x-show="paymentMethod === 'selcom'" x-transition class="mt-4">
+                                        <label for="payment_phone"
+                                            class="block text-sm font-medium text-slate-700">Phone Number for
+                                            Payment</label>
+                                        <div class="mt-1 relative rounded-md shadow-sm">
+                                            <div
+                                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                                <span class="text-gray-500 sm:text-sm">
+                                                    +255
+                                                </span>
+                                            </div>
+                                            <input type="text" name="payment_phone" id="payment_phone"
+                                                class="focus:ring-[#fa8900] focus:border-[#fa8900] block w-full pl-12 sm:text-sm border-gray-300 rounded-md"
+                                                placeholder="7XXXXXXXX">
+                                        </div>
+                                        <p class="mt-2 text-xs text-slate-500">Enter the number you want to pay with
+                                            (format: 7XXXXXXXX).</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -99,7 +202,8 @@
                                     <dt class="text-slate-600 w-2/3 truncate">{{ $item->product->name }}
                                         (x{{ $item->quantity }})</dt>
                                     <dd class="font-medium text-slate-900">TZS
-                                        {{ number_format($item->product->price * $item->quantity, 0) }}</dd>
+                                        {{ number_format($item->product->price * $item->quantity, 0) }}
+                                    </dd>
                                 </div>
                             @endforeach
 

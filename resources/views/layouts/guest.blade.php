@@ -34,8 +34,8 @@
     class="font-sans antialiased text-slate-900 bg-slate-50 h-full flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
     <div class="sm:mx-auto sm:w-full sm:max-w-md text-center mb-6">
         <a href="/" class="flex justify-center items-center gap-1 mb-6">
-            <span class="text-3xl font-bold tracking-tight text-[#232f3e]">amazon<span
-                    class="text-[#fa8900]">.pro</span></span>
+            <span class="text-3xl font-bold tracking-tight text-[#232f3e]">100<span
+                    class="text-[#fa8900]">X</span></span>
         </a>
     </div>
 
@@ -45,7 +45,7 @@
         </div>
 
         <div class="mt-6 text-center text-xs text-slate-500">
-            <p>&copy; 1996-2026, Amazon.com, Inc. or its affiliates</p>
+            <p>&copy; 2026 100X, Inc. All rights reserved.</p>
         </div>
     </div>
 </body>

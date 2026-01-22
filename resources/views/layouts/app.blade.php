@@ -15,7 +15,12 @@
 
     <!-- Styles / Scripts -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style type="text/css">
+        [x-cloak] {
+            display: none !important;
+        }
+
         @theme {
             --color-brand-black: #232f3e;
             --color-brand-dark: #19212c;
@@ -60,7 +65,7 @@
             <!-- Logo -->
             <a href="/"
                 class="flex items-center pt-2 px-2 border border-transparent hover:border-white rounded-sm transition-all duration-200">
-                <span class="text-2xl font-bold tracking-tight">amazon<span class="text-[#fa8900]">.pro</span></span>
+                <span class="text-2xl font-bold tracking-tight">100<span class="text-[#fa8900]">X</span></span>
             </a>
 
             <!-- Location Picker -->
@@ -99,7 +104,7 @@
                     </div>
                 </div>
 
-                <input type="text" placeholder="Search Amazon Pro"
+                <input type="text" placeholder="Search 100X"
                     class="flex-grow px-4 text-slate-900 bg-white placeholder:text-slate-500 focus:outline-none text-sm font-medium">
 
                 <button
@@ -174,35 +179,12 @@
             </a>
         </div>
 
-        <!-- Sub Navigation -->
-        <div
-            class="bg-[#19212c] flex items-center gap-1 py-1 px-4 text-sm font-medium overflow-x-auto whitespace-nowrap custom-scrollbar">
-            <button
-                class="flex items-center gap-1 p-1 px-2 border border-transparent hover:border-white rounded-sm font-bold">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                All
-            </button>
-            <a href="{{ route('orders.index') }}"
-                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Orders</a>
-            <a href="#"
-                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">History</a>
-            <a href="#"
-                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Payments</a>
-            <a href="#"
-                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Customer
-                Service</a>
-            @auth
-                <form method="POST" action="{{ route('logout') }}" class="inline-flex">
-                    @csrf
-                    <button type="submit"
-                        class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Logout</button>
-                </form>
-            @endauth
-        </div>
+
     </header>
+
+
+
+
 
     <main>
         {{ $slot }}
@@ -223,28 +205,28 @@
                 <ul class="text-sm text-slate-300 space-y-2">
                     <li><a href="#" class="hover:underline">Careers</a></li>
                     <li><a href="#" class="hover:underline">Blog</a></li>
-                    <li><a href="#" class="hover:underline">About Amazon</a></li>
+                    <li><a href="#" class="hover:underline">About 100X</a></li>
                     <li><a href="#" class="hover:underline">Investor Relations</a></li>
-                    <li><a href="#" class="hover:underline">Amazon Devices</a></li>
+                    <li><a href="#" class="hover:underline">100X Devices</a></li>
                 </ul>
             </div>
             <div class="flex flex-col gap-3">
                 <h4 class="font-bold text-base text-white">Make Money with Us</h4>
                 <ul class="text-sm text-slate-300 space-y-2">
-                    <li><a href="#" class="hover:underline">Sell products on Amazon</a></li>
-                    <li><a href="#" class="hover:underline">Sell on Amazon Business</a></li>
-                    <li><a href="#" class="hover:underline">Sell apps on Amazon</a></li>
+                    <li><a href="#" class="hover:underline">Sell products on 100X</a></li>
+                    <li><a href="#" class="hover:underline">Sell on 100X Business</a></li>
+                    <li><a href="#" class="hover:underline">Sell apps on 100X</a></li>
                     <li><a href="#" class="hover:underline">Become an Affiliate</a></li>
                     <li><a href="#" class="hover:underline">Advertise Your Products</a></li>
                 </ul>
             </div>
             <div class="flex flex-col gap-3">
-                <h4 class="font-bold text-base text-white">Amazon Payment Products</h4>
+                <h4 class="font-bold text-base text-white">100X Payment Products</h4>
                 <ul class="text-sm text-slate-300 space-y-2">
-                    <li><a href="#" class="hover:underline">Amazon Business Card</a></li>
+                    <li><a href="#" class="hover:underline">100X Business Card</a></li>
                     <li><a href="#" class="hover:underline">Shop with Points</a></li>
                     <li><a href="#" class="hover:underline">Reload Your Balance</a></li>
-                    <li><a href="#" class="hover:underline">Amazon Currency Converter</a></li>
+                    <li><a href="#" class="hover:underline">100X Currency Converter</a></li>
                 </ul>
             </div>
             <div class="flex flex-col gap-3">
@@ -261,7 +243,7 @@
 
         <div class="border-t border-slate-700/50 py-10 flex flex-col items-center gap-6 bg-[#131921]">
             <div class="text-2xl font-bold italic tracking-tighter flex items-baseline gap-1">
-                <span>amazon</span><span class="text-[#ff9900] text-sm not-italic">.pro</span>
+                <span>100</span><span class="text-[#ff9900] text-sm not-italic">X</span>
             </div>
 
             <div class="flex flex-wrap justify-center gap-1 sm:gap-6 px-4">
@@ -282,7 +264,7 @@
                 <a href="#" class="hover:underline">Consumer Health Data Privacy Disclosure</a>
                 <a href="#" class="hover:underline">Your Ads Privacy Choices</a>
             </div>
-            <p class="text-[10px] text-slate-500">© 1996-2026, Amazon.com, Inc. or its affiliates</p>
+            <p class="text-[10px] text-slate-500">© 2026 100X, Inc. All rights reserved.</p>
         </div>
     </footer>
 

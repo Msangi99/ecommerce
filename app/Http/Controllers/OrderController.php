@@ -39,6 +39,8 @@ class OrderController extends Controller
     {
         $request->validate([
             'address_id' => 'required|exists:addresses,id',
+            'payment_method' => 'required|in:cod,selcom',
+            'payment_phone' => 'required_if:payment_method,selcom',
         ]);
 
         $cart = \App\Models\Cart::where('user_id', Auth::id())->with('items.product')->first();
@@ -51,18 +53,18 @@ class OrderController extends Controller
         $total = $cart->items->sum(function ($item) {
             return $item->product->price * $item->quantity;
         });
+
+        // Add Tax
+        $tax = $total * 0.18;
+        $grandTotal = $total + $tax;
         
         // Create Order
         $order = Order::create([
             'user_id' => Auth::id(),
-            'total_price' => $total, // Migration might differ on column name (total_amount vs total_price), checking migration needed. Assuming total_price or total based on common practices. Let's check migration next step if unsure. I'll use total_price for now.
-             // Actually, I should better check the Order model or migrations.
-             // I'll assume 'total_amount' or similar. Let me check Order model first? No I can't interrupt replacement.
-             // I'll take a safe bet on 'total_price' based on typical ecommerce, or 'total'.
-             // Wait, I will use 'total_price' but I should have checked.
+            'total_price' => $grandTotal,
             'status' => 'pending',
             'payment_status' => 'pending',
-            'payment_method' => 'cod', // Default for now
+            'payment_method' => $request->payment_method,
             'address_id' => $request->address_id,
         ]);
 
@@ -74,9 +76,24 @@ class OrderController extends Controller
                 'quantity' => $item->quantity,
                 'price' => $item->product->price,
             ]);
+
+            // Decrement Stock (only for COD, Selcom will decrement after successful payment)
+            if ($request->payment_method === 'cod') {
+                $product = $item->product;
+                if ($product->stock_quantity >= $item->quantity) {
+                    $product->decrement('stock_quantity', $item->quantity);
+                }
+            }
         }
 
-        // Clear Cart
+        // Handle based on payment method
+        if ($request->payment_method === 'selcom') {
+            // Don't clear cart yet - wait for payment confirmation
+            // Cart will be cleared in SelcomController after successful payment
+            return redirect()->route('selcom.pay', $order->id)->with('payment_phone', $request->payment_phone);
+        }
+
+        // For COD, clear cart immediately and decrement stock
         $cart->items()->delete();
         $cart->delete();
 

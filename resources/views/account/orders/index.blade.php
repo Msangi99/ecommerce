@@ -56,7 +56,7 @@
                                          <h4 class="text-sm font-medium text-blue-600 hover:underline">
                                              <a href="{{ route('product.show', $item->product_id) }}">{{ $item->product->name }}</a>
                                          </h4>
-                                         <p class="text-xs text-gray-500 mt-1">Sold by: Amazon.pro</p>
+                                         <p class="text-xs text-gray-500 mt-1">Sold by: 100X</p>
                                          <p class="text-sm mt-1 font-bold text-[#b12704]">TZS {{ number_format($item->price, 0) }}</p>
                                          <div class="mt-2 text-sm">
                                              <button class="bg-[#ffd814] border border-[#fcd200] rounded-lg px-3 py-1 hover:bg-[#f7ca00] text-sm shadow-sm">Buy it again</button>

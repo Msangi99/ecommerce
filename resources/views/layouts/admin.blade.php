@@ -20,305 +20,539 @@
     <style type="text/css">
         @theme {
             --color-brand-black: #232f3e;
+            --color-brand-dark: #19212c;
             --color-brand-orange: #fa8900;
+            --color-brand-yellow: #febd69;
             --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
         }
 
         [x-cloak] {
             display: none !important;
         }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
 
-<body class="font-sans antialiased text-slate-600 bg-slate-50 h-full flex overflow-hidden">
+<body class="font-sans antialiased text-slate-600 bg-slate-50 min-h-full" x-data="{ sidebarOpen: false }">
 
-    <!-- Sidebar -->
-    <aside class="w-64 bg-white border-r border-slate-200 flex-shrink-0 flex flex-col h-full overflow-y-auto">
-        <!-- Logo / Brand -->
-        <div class="h-16 flex items-center px-6 border-b border-slate-100">
-            <span class="text-xl font-bold tracking-tight text-[#232f3e]">amazon<span
-                    class="text-[#fa8900]">.pro</span></span>
-        </div>
+    <!-- Header -->
+    <header class="bg-[#232f3e] text-white sticky top-0 z-50">
+        <!-- Main Bar -->
+        <div class="max-w-[1600px] mx-auto flex items-center gap-2 lg:gap-4 p-2 px-4">
+            <!-- Sidebar Toggle Button -->
+            <button @click="sidebarOpen = !sidebarOpen"
+                class="flex items-center gap-1 p-2 border border-transparent hover:border-white rounded-sm transition-all duration-200"
+                aria-label="Toggle Sidebar">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
 
-        <nav class="flex-1 px-4 py-6 space-y-6">
+            <!-- Logo -->
+            <a href="{{ route('admin.dashboard') }}"
+                class="flex items-center pt-2 px-2 border border-transparent hover:border-white rounded-sm transition-all duration-200">
+                <span class="text-2xl font-bold tracking-tight">100<span class="text-[#fa8900]">X</span></span>
+                <span class="ml-2 text-xs font-medium bg-[#fa8900] text-[#232f3e] px-2 py-0.5 rounded">ADMIN</span>
+            </a>
 
-            <!-- Dashboard Section -->
-            <div>
-                <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Dashboard</h3>
-                <div class="space-y-1">
-                    <a href="#"
-                        class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                        Business Analytics
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                        </svg>
-                        Overview
-                    </a>
-                </div>
+            <!-- Spacer -->
+            <div class="flex-grow"></div>
+
+            <!-- Quick Actions -->
+            <div class="hidden md:flex items-center gap-2">
+                <!-- Notifications -->
+                <button
+                    class="p-2 border border-transparent hover:border-white rounded-sm transition-all duration-200 relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    <span class="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                </button>
+
+                <!-- View Website -->
+                <a href="/" target="_blank"
+                    class="flex items-center gap-2 p-2 px-3 border border-transparent hover:border-white rounded-sm transition-all duration-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                    <span class="text-sm font-medium">View Site</span>
+                </a>
             </div>
 
-            <!-- Management Section -->
-            <div>
-                <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Management</h3>
-                <div class="space-y-1">
-
-                    <!-- Products -->
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open"
-                            class="w-full flex items-center justify-between px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                            <div class="flex items-center gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                                </svg>
-                                Products
-                            </div>
-                            <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{ 'rotate-180': open }"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                        <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
-                            <a href="{{ route('admin.products.index') }}"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">All Products</a>
-                            <a href="{{ route('admin.products.create') }}"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Add Product</a>
-                            <a href="#"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Categories</a>
-                            <a href="{{ route('admin.products.index') }}"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Stock</a>
-                            <a href="#" class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Low
-                                Stock</a>
-                        </div>
+            <!-- User Profile -->
+            <div class="relative" x-data="{ userMenuOpen: false }">
+                <button @click="userMenuOpen = !userMenuOpen"
+                    class="flex items-center gap-2 p-2 border border-transparent hover:border-white rounded-sm transition-all duration-200">
+                    <div
+                        class="w-8 h-8 rounded-full bg-[#fa8900] flex items-center justify-center text-sm font-bold text-[#232f3e]">
+                        {{ substr(Auth::user()->name, 0, 1) }}
                     </div>
-
-                    <!-- Orders -->
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open"
-                            class="w-full flex items-center justify-between px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                            <div class="flex items-center gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                Orders
-                            </div>
-                            <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{ 'rotate-180': open }"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                        <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
-                            <a href="#" class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">All
-                                Orders</a>
-                            <a href="#"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Pending</a>
-                            <a href="#"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Processing</a>
-                            <a href="#"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Completed</a>
-                        </div>
+                    <div class="hidden md:flex flex-col items-start">
+                        <span class="text-xs text-slate-300">Admin</span>
+                        <span class="text-sm font-medium">{{ Auth::user()->name }}</span>
                     </div>
-
-                    <!-- Customers -->
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open"
-                            class="w-full flex items-center justify-between px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                            <div class="flex items-center gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                                </svg>
-                                Customers
-                            </div>
-                            <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{ 'rotate-180': open }"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                        <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
-                            <a href="#" class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">All
-                                Customers</a>
-                            <a href="{{ route('admin.dealers.index') }}"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Dealers /
-                                Approvals</a>
-                            <a href="#"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Retailers</a>
-                            <a href="#"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Requests</a>
-                        </div>
-                    </div>
-
-                    <!-- Staff -->
-                    <a href="#"
-                        class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                        </svg>
-                        Staff
-                    </a>
-
-                </div>
-            </div>
-
-            <!-- Operations Section -->
-            <div>
-                <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Operations</h3>
-                <div class="space-y-1">
-                    <a href="{{ route('admin.products.index') }}"
-                        class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                        </svg>
-                        Inventory
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                        </svg>
-                        Payments
-                    </a>
-
-                    <!-- Reports -->
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open"
-                            class="w-full flex items-center justify-between px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                            <div class="flex items-center gap-3">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
-                                Reports
-                            </div>
-                            <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{ 'rotate-180': open }"
-                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </button>
-                        <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
-                            <a href="#" class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Sales</a>
-                            <a href="#"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Traffic</a>
-                            <a href="#"
-                                class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Returns</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Settings Section -->
-            <div>
-                <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Settings</h3>
-                <div class="space-y-1">
-                    <a href="#"
-                        class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                        General
-                    </a>
-                    <a href="#"
-                        class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                        </svg>
-                        Store Settings
-                    </a>
-                </div>
-            </div>
-        </nav>
-
-        <!-- User Profile (Bottom) -->
-        <div class="p-4 border-t border-slate-200 mt-auto" x-data="{ open: false }">
-            <div class="relative">
-                <button @click="open = !open" class="w-full flex items-center justify-between group">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold overflow-hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                        </div>
-                        <div class="flex-1 min-w-0 text-left">
-                            <p class="text-sm font-medium text-slate-900 truncate">{{ Auth::user()->name }}</p>
-                            <p class="text-xs text-slate-500 truncate">{{ Auth::user()->email }}</p>
-                        </div>
-                    </div>
-                    <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-transform"
-                        :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg class="w-4 h-4 text-slate-300 transition-transform" :class="{ 'rotate-180': userMenuOpen }"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
 
-                <!-- Dropdown -->
-                <div x-show="open" @click.away="open = false" x-cloak
-                    class="absolute bottom-full left-0 w-full mb-2 bg-white rounded-md shadow-lg border border-slate-200 py-1 z-50">
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit"
-                            class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-red-600 flex items-center gap-2">
+                <!-- User Dropdown -->
+                <div x-show="userMenuOpen" @click.away="userMenuOpen = false" x-cloak
+                    x-transition:enter="transition ease-out duration-100"
+                    x-transition:enter-start="transform opacity-0 scale-95"
+                    x-transition:enter-end="transform opacity-100 scale-100"
+                    x-transition:leave="transition ease-in duration-75"
+                    x-transition:leave-start="transform opacity-100 scale-100"
+                    x-transition:leave-end="transform opacity-0 scale-95"
+                    class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg border border-slate-200 py-1 z-50">
+                    <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-slate-700 hover:bg-slate-50">
+                        <div class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
-                            Log Out
+                            Profile
+                        </div>
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit"
+                            class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-red-600">
+                            <div class="flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                                Log Out
+                            </div>
                         </button>
                     </form>
                 </div>
             </div>
         </div>
-    </aside>
 
-    <!-- Main Content -->
-    <main class="flex-1 h-full overflow-y-auto bg-slate-50">
-        {{ $slot }}
-    </main>
+        <!-- Sub Navigation -->
+        <div
+            class="bg-[#19212c] flex items-center gap-1 py-1 px-4 text-sm font-medium overflow-x-auto whitespace-nowrap custom-scrollbar">
+            <a href="{{ route('admin.dashboard') }}"
+                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Dashboard</a>
+            <a href="{{ route('admin.products.index') }}"
+                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Products</a>
+            <a href="{{ route('admin.orders.index') }}"
+                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Orders</a>
+            <a href="{{ route('admin.dealers.index') }}"
+                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Dealers</a>
+            <a href="{{ route('admin.reports.index') }}"
+                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Reports</a>
+            <a href="{{ route('admin.settings.index') }}"
+                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Settings</a>
+        </div>
+    </header>
+
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Sidebar Overlay (Mobile) -->
+        <div x-show="sidebarOpen" @click="sidebarOpen = false" x-cloak class="fixed inset-0 bg-black/50 z-40 lg:hidden"
+            x-transition:enter="transition-opacity ease-linear duration-300" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity ease-linear duration-300"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
+        </div>
+
+        <!-- Sidebar -->
+        <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
+            class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex-shrink-0 flex flex-col h-[calc(100vh-112px)] overflow-y-auto transform transition-transform duration-300 ease-in-out custom-scrollbar mt-[112px] lg:mt-0">
+
+            <!-- Close button (Mobile) -->
+            <div class="lg:hidden flex items-center justify-between p-4 border-b border-slate-100">
+                <span class="text-lg font-bold tracking-tight text-[#232f3e]">100<span class="text-[#fa8900]">X</span>
+                    Menu</span>
+                <button @click="sidebarOpen = false" class="p-1 rounded hover:bg-slate-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <nav class="flex-1 px-4 py-6 space-y-6">
+
+                <!-- Dashboard Section -->
+                <div>
+                    <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Dashboard</h3>
+                    <div class="space-y-1">
+                        <a href="#"
+                            class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                            Business Analytics
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                            </svg>
+                            Overview
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Management Section -->
+                <div>
+                    <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Management</h3>
+                    <div class="space-y-1">
+
+                        <!-- Products -->
+                        <div x-data="{ open: false }">
+                            <button @click="open = !open"
+                                class="w-full flex items-center justify-between px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                                <div class="flex items-center gap-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                    </svg>
+                                    Products
+                                </div>
+                                <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{ 'rotate-180': open }"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
+                                <a href="{{ route('admin.products.index') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">All
+                                    Products</a>
+                                <a href="{{ route('admin.products.create') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Add
+                                    Product</a>
+                                <a href="#"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Categories</a>
+                                <a href="{{ route('admin.products.index') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Stock</a>
+                                <a href="#" class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Low
+                                    Stock</a>
+                            </div>
+                        </div>
+
+                        <!-- Orders -->
+                        <div x-data="{ open: false }">
+                            <button @click="open = !open"
+                                class="w-full flex items-center justify-between px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                                <div class="flex items-center gap-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                    Orders
+                                </div>
+                                <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{ 'rotate-180': open }"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
+                                <a href="{{ route('admin.orders.index') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">All
+                                    Orders</a>
+                                <a href="#"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Pending</a>
+                                <a href="#"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Processing</a>
+                                <a href="#"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Completed</a>
+                            </div>
+                        </div>
+
+                        <!-- Customers -->
+                        <div x-data="{ open: false }">
+                            <button @click="open = !open"
+                                class="w-full flex items-center justify-between px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                                <div class="flex items-center gap-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                                    </svg>
+                                    Customers
+                                </div>
+                                <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{ 'rotate-180': open }"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
+                                <a href="{{ route('admin.customers.index') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">All
+                                    Customers</a>
+                                <a href="{{ route('admin.dealers.index') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Dealers /
+                                    Approvals</a>
+                                <a href="#"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Retailers</a>
+                                <a href="#"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Requests</a>
+                            </div>
+                        </div>
+
+                        <!-- Staff -->
+                        <a href="#"
+                            class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                            </svg>
+                            Staff
+                        </a>
+
+                    </div>
+                </div>
+
+                <!-- Operations Section -->
+                <div>
+                    <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Operations</h3>
+                    <div class="space-y-1">
+                        <a href="{{ route('admin.products.index') }}"
+                            class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                            </svg>
+                            Inventory
+                        </a>
+                        <a href="#"
+                            class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                            </svg>
+                            Payments
+                        </a>
+
+                        <!-- Reports -->
+                        <div x-data="{ open: false }">
+                            <button @click="open = !open"
+                                class="w-full flex items-center justify-between px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                                <div class="flex items-center gap-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                    Reports
+                                </div>
+                                <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{ 'rotate-180': open }"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
+                                <a href="{{ route('admin.reports.index') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Sales</a>
+                                <a href="#"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Traffic</a>
+                                <a href="#"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Returns</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Section -->
+                <div>
+                    <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Settings</h3>
+                    <div class="space-y-1">
+                        <a href="#"
+                            class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            General
+                        </a>
+                        <a href="{{ route('admin.settings.index') }}"
+                            class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                            </svg>
+                            Store Settings
+                        </a>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- User Profile (Bottom) -->
+            <div class="p-4 border-t border-slate-200 mt-auto" x-data="{ open: false }">
+                <div class="relative">
+                    <button @click="open = !open" class="w-full flex items-center justify-between group">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-9 h-9 rounded-full bg-slate-200 flex items-center justify-center text-slate-500 font-bold overflow-hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
+                            <div class="flex-1 min-w-0 text-left">
+                                <p class="text-sm font-medium text-slate-900 truncate">{{ Auth::user()->name }}</p>
+                                <p class="text-xs text-slate-500 truncate">{{ Auth::user()->email }}</p>
+                            </div>
+                        </div>
+                        <svg class="w-4 h-4 text-slate-400 group-hover:text-slate-600 transition-transform"
+                            :class="{ 'rotate-180': open }" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown -->
+                    <div x-show="open" @click.away="open = false" x-cloak
+                        class="absolute bottom-full left-0 w-full mb-2 bg-white rounded-md shadow-lg border border-slate-200 py-1 z-50">
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                class="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 hover:text-red-600 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                                </svg>
+                                Log Out
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col min-h-[calc(100vh-112px)] overflow-y-auto">
+            <!-- Main Content -->
+            <main class="flex-1 bg-slate-50 p-6">
+                {{ $slot }}
+            </main>
+
+            <!-- Footer -->
+            <footer class="bg-[#232f3e] text-white border-t border-slate-700">
+                <!-- Back to top -->
+                <a href="#"
+                    class="block text-center py-3 bg-[#37475a] hover:bg-[#485769] transition-colors text-sm font-medium tracking-wide">
+                    Back to top
+                </a>
+
+                <!-- Footer Links -->
+                <div class="max-w-[1000px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-8 py-10 px-6">
+                    <div class="flex flex-col gap-3">
+                        <h4 class="font-bold text-base text-white">Quick Links</h4>
+                        <ul class="text-sm text-slate-300 space-y-2">
+                            <li><a href="{{ route('admin.dashboard') }}" class="hover:underline">Dashboard</a></li>
+                            <li><a href="{{ route('admin.products.index') }}" class="hover:underline">Products</a></li>
+                            <li><a href="{{ route('admin.orders.index') }}" class="hover:underline">Orders</a></li>
+                            <li><a href="{{ route('admin.dealers.index') }}" class="hover:underline">Dealers</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h4 class="font-bold text-base text-white">Management</h4>
+                        <ul class="text-sm text-slate-300 space-y-2">
+                            <li><a href="{{ route('admin.customers.index') }}" class="hover:underline">Customers</a>
+                            </li>
+                            <li><a href="#" class="hover:underline">Inventory</a></li>
+                            <li><a href="#" class="hover:underline">Payments</a></li>
+                            <li><a href="#" class="hover:underline">Shipping</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h4 class="font-bold text-base text-white">Reports</h4>
+                        <ul class="text-sm text-slate-300 space-y-2">
+                            <li><a href="{{ route('admin.reports.index') }}" class="hover:underline">Sales Reports</a>
+                            </li>
+                            <li><a href="#" class="hover:underline">Traffic Analytics</a></li>
+                            <li><a href="#" class="hover:underline">Returns & Refunds</a></li>
+                            <li><a href="#" class="hover:underline">Customer Insights</a></li>
+                        </ul>
+                    </div>
+                    <div class="flex flex-col gap-3">
+                        <h4 class="font-bold text-base text-white">Support</h4>
+                        <ul class="text-sm text-slate-300 space-y-2">
+                            <li><a href="#" class="hover:underline">Help Center</a></li>
+                            <li><a href="#" class="hover:underline">Documentation</a></li>
+                            <li><a href="#" class="hover:underline">API Reference</a></li>
+                            <li><a href="/" target="_blank" class="hover:underline">View Store</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-700/50 py-8 flex flex-col items-center gap-4 bg-[#131921]">
+                    <div class="text-2xl font-bold italic tracking-tighter flex items-baseline gap-1">
+                        <span>100</span><span class="text-[#ff9900] text-sm not-italic">X</span>
+                        <span class="text-xs font-normal not-italic ml-2 text-slate-400">Admin Panel</span>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-4 text-xs text-slate-400">
+                        <a href="#" class="hover:underline">Terms of Service</a>
+                        <a href="#" class="hover:underline">Privacy Policy</a>
+                        <a href="#" class="hover:underline">Admin Guidelines</a>
+                        <a href="#" class="hover:underline">Contact Support</a>
+                    </div>
+                    <p class="text-[10px] text-slate-500">© 2026 100X, Inc. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    </div>
 
     @stack('scripts')
 </body>

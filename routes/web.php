@@ -24,7 +24,13 @@ Route::view('profile', 'profile')
     ->name('profile');
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::view('dashboard', 'admin.dashboard')->name('dashboard');
+    Route::get('dashboard', function () {
+        $totalCustomers = \App\Models\User::where('role', 'customer')->count();
+        $totalOrders = \App\Models\Order::count();
+        $totalProducts = \App\Models\Product::count();
+        $recentOrders = \App\Models\Order::with('user')->latest()->take(5)->get();
+        return view('admin.dashboard', compact('totalCustomers', 'totalOrders', 'totalProducts', 'recentOrders'));
+    })->name('dashboard');
     Route::resource('products', ProductController::class);
     
     // Dealers Management
@@ -32,6 +38,19 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('dealers/{user}', [App\Http\Controllers\Admin\DealerController::class, 'show'])->name('dealers.show');
     Route::patch('dealers/{user}/approve', [App\Http\Controllers\Admin\DealerController::class, 'approve'])->name('dealers.approve');
     Route::patch('dealers/{user}/reject', [App\Http\Controllers\Admin\DealerController::class, 'reject'])->name('dealers.reject');
+
+    // Orders
+    Route::resource('orders', App\Http\Controllers\Admin\OrderController::class)->only(['index', 'show', 'update']);
+
+    // Customers
+    Route::get('customers', [App\Http\Controllers\Admin\CustomerController::class, 'index'])->name('customers.index');
+
+    // Settings
+    Route::get('settings', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('settings.index');
+    Route::post('settings', [App\Http\Controllers\Admin\SettingController::class, 'update'])->name('settings.update');
+
+    // Reports
+    Route::get('reports', [App\Http\Controllers\Admin\ReportController::class, 'index'])->name('reports.index');
 });
 
 Route::middleware(['auth', 'active'])->group(function () {
@@ -43,6 +62,9 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/orders', [App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
     Route::get('/checkout', [App\Http\Controllers\OrderController::class, 'create'])->name('checkout.create');
     Route::post('/checkout', [App\Http\Controllers\OrderController::class, 'store'])->name('checkout.store');
+
+    Route::get('checkout/pay/{order}', [App\Http\Controllers\SelcomController::class, 'pay'])->name('selcom.pay');
+    Route::get('checkout/status/{order}', [App\Http\Controllers\SelcomController::class, 'checkStatus'])->name('selcom.status');
     Route::resource('addresses', App\Http\Controllers\AddressController::class);
 });
 

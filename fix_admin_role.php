@@ -6,7 +6,7 @@ $kernel->bootstrap();
 
 use App\Models\User;
 
-$user = User::where('email', 'admin@amazon.pro')->first();
+$user = User::where('email', 'admin@100x.com')->first();
 if ($user) {
     echo "User found: " . $user->name . "\n";
     echo "Role: " . $user->role . "\n";
@@ -20,5 +20,5 @@ if ($user) {
         echo "Role is already admin.\n";
     }
 } else {
-    echo "User admin@amazon.pro not found.\n";
+    echo "User admin@100x.com not found.\n";
 }
