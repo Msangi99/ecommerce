@@ -32,6 +32,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         return view('admin.dashboard', compact('totalCustomers', 'totalOrders', 'totalProducts', 'recentOrders'));
     })->name('dashboard');
     Route::resource('products', ProductController::class);
+    Route::resource('categories', App\Http\Controllers\Admin\CategoryController::class);
     
     // Dealers Management
     Route::get('dealers', [App\Http\Controllers\Admin\DealerController::class, 'index'])->name('dealers.index');

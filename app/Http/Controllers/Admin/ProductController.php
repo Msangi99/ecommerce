@@ -16,12 +16,14 @@ class ProductController extends Controller
 
     public function create()
     {
-        return view('admin.products.create');
+        $categories = \App\Models\Category::all();
+        return view('admin.products.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
+            'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'stock_quantity' => 'required|integer|min:0',
@@ -40,6 +42,7 @@ class ProductController extends Controller
         }
 
         Product::create([
+            'category_id' => $request->category_id,
             'name' => $request->name,
             'brand' => 'Samsung', // Enforce Samsung as per requirement
             'price' => $request->price,
@@ -53,12 +56,14 @@ class ProductController extends Controller
     }
     public function edit(Product $product)
     {
-        return view('admin.products.edit', compact('product'));
+        $categories = \App\Models\Category::all();
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     public function update(Request $request, Product $product)
     {
         $request->validate([
+            'category_id' => 'required|exists:categories,id',
             'name' => 'required|string|max:255',
             'price' => 'required|numeric|min:0',
             'stock_quantity' => 'required|integer|min:0',
@@ -81,6 +86,7 @@ class ProductController extends Controller
         }
 
         $product->update([
+            'category_id' => $request->category_id,
             'name' => $request->name,
             'price' => $request->price,
             'rating' => $request->rating,

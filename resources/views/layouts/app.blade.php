@@ -58,128 +58,165 @@
 
 <body class="font-sans antialiased bg-slate-50 text-slate-900">
 
-    <!-- Top Header -->
+    <!-- Header -->
     <header class="bg-[#232f3e] text-white sticky top-0 z-50">
-        <!-- Main Bar -->
-        <div class="max-w-[1600px] mx-auto flex items-center gap-2 lg:gap-4 p-2 px-4">
-            <!-- Logo -->
-            <a href="/"
-                class="flex items-center pt-2 px-2 border border-transparent hover:border-white rounded-sm transition-all duration-200">
-                <span class="text-2xl font-bold tracking-tight">100<span class="text-[#fa8900]">X</span></span>
-            </a>
-
-            <!-- Location Picker -->
-            <div
-                class="hidden lg:flex items-center px-2 py-1 border border-transparent hover:border-white rounded-sm cursor-pointer min-w-[120px] transition-all duration-200 group">
-                <div class="mr-1 mt-auto mb-1 text-slate-300 group-hover:text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                </div>
-                <div class="flex flex-col justify-center leading-tight">
-                    <span class="text-[12px] text-slate-300 block leading-none">Deliver to</span>
-                    <span class="font-bold text-sm text-white leading-none mt-0.5">New York 10001</span>
-                </div>
-            </div>
-
-            <!-- Enhanced Search -->
-            <div
-                class="flex-grow flex h-10 rounded-md overflow-hidden ring-2 ring-transparent focus-within:ring-[#fa8900] transition-shadow duration-200 mx-2">
-                <div class="relative group">
-                    <select
-                        class="h-full bg-slate-100 text-slate-600 text-xs px-3 pr-6 border-r border-slate-300 focus:outline-none cursor-pointer hover:bg-slate-200 hover:text-slate-900 transition-colors appearance-none text-center min-w-[60px]">
-                        <option>All</option>
-                        <option>Electronics</option>
-                        <option>Home</option>
-                        <option>Fashion</option>
-                    </select>
-                    <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
-                        <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20">
-                            <path
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                        </svg>
-                    </div>
-                </div>
-
-                <input type="text" placeholder="Search 100X"
-                    class="flex-grow px-4 text-slate-900 bg-white placeholder:text-slate-500 focus:outline-none text-sm font-medium">
-
-                <button
-                    class="bg-[#febd69] hover:bg-[#fa8900] text-[#131921] px-6 transition-colors duration-200 flex items-center justify-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="2.5">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        <div class="max-w-[1600px] mx-auto">
+            <!-- Main Bar -->
+            <div class="flex items-center gap-2 lg:gap-4 p-2 px-4 h-14 lg:h-16">
+                <!-- Mobile Menu Icon (Visible on mobile only) -->
+                <button class="lg:hidden p-1 hover:border border-transparent hover:border-white rounded-sm">
+                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
-            </div>
 
-            <!-- Language (Simulated) -->
-            <div
-                class="hidden md:flex items-center gap-1 p-2 border border-transparent hover:border-white rounded-sm cursor-pointer min-w-[60px]">
-                <img src="https://flagcdn.com/w20/us.png" alt="US" class="w-5 h-3.5 object-cover">
-                <span class="font-bold text-sm">EN</span>
-                <svg class="w-2.5 h-2.5 fill-slate-300" viewBox="0 0 20 20">
-                    <path
-                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                </svg>
-            </div>
+                <!-- Logo -->
+                <a href="/"
+                    class="flex items-center pt-1 px-2 border border-transparent hover:border-white rounded-sm transition-all duration-200">
+                    <span class="text-xl lg:text-2xl font-bold tracking-tight">100<span
+                            class="text-[#fa8900]">X</span></span>
+                </a>
 
-            <!-- Navigation Links -->
-            @auth
-                <a href="{{ route('dashboard') }}"
-                    class="hidden md:flex flex-col justify-center px-2 py-1 border border-transparent hover:border-white rounded-sm cursor-pointer leading-tight min-w-[124px] relative group">
-                    <span class="text-[12px] text-slate-300 block h-3.5 leading-tight">Hello,
-                        {{ Auth::user()->name }}</span>
-                    <div class="flex items-center gap-0.5">
-                        <span class="font-bold text-sm leading-tight">Account & Lists</span>
-                        <svg class="w-2.5 h-2.5 fill-slate-300 text-slate-400 mt-1" viewBox="0 0 20 20">
-                            <path
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                <!-- Location Picker (Hidden on mobile) -->
+                <div
+                    class="hidden lg:flex items-center px-2 py-1 border border-transparent hover:border-white rounded-sm cursor-pointer min-w-[120px] transition-all duration-200 group">
+                    <div class="mr-1 mt-auto mb-1 text-slate-300 group-hover:text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                         </svg>
                     </div>
-                </a>
-            @else
-                <a href="{{ route('login') }}"
-                    class="hidden md:flex flex-col justify-center px-2 py-1 border border-transparent hover:border-white rounded-sm cursor-pointer leading-tight min-w-[124px] relative group">
-                    <span class="text-[12px] text-slate-300 block h-3.5 leading-tight">Hello, sign in</span>
-                    <div class="flex items-center gap-0.5">
-                        <span class="font-bold text-sm leading-tight">Account & Lists</span>
-                        <svg class="w-2.5 h-2.5 fill-slate-300 text-slate-400 mt-1" viewBox="0 0 20 20">
-                            <path
-                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                        </svg>
+                    <div class="flex flex-col justify-center leading-tight">
+                        <span class="text-[12px] text-slate-300 block leading-none">Deliver to</span>
+                        <span class="font-bold text-sm text-white leading-none mt-0.5">New York 10001</span>
                     </div>
-                </a>
-            @endauth
-
-            <div
-                class="hidden md:flex flex-col justify-center px-2 py-1 border border-transparent hover:border-white rounded-sm cursor-pointer leading-tight min-w-[75px]">
-                <span class="text-[12px] text-slate-300 block h-3.5 leading-tight">Returns</span>
-                <span class="font-bold text-sm leading-tight">& Orders</span>
-            </div>
-
-            <!-- Cart -->
-            <a href="/cart"
-                class="flex items-end px-2 py-1 border border-transparent hover:border-white rounded-sm transition-all gap-1 min-w-[80px] relative">
-                <div class="relative flex items-end">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9 text-white" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                    <!-- Cart Count centered above the cart basket -->
-                    <span
-                        class="absolute -top-0.5 left-[17px] -translate-x-1/2 text-[#f08804] font-bold text-[16px] leading-none">{{ $cartCount }}</span>
                 </div>
-                <span class="font-bold text-sm mb-1 hidden sm:block">Cart</span>
-            </a>
+
+                <!-- Desktop Search (Visible on Desktop only) -->
+                <div
+                    class="hidden lg:flex flex-grow h-10 rounded-md overflow-hidden ring-2 ring-transparent focus-within:ring-[#fa8900] transition-shadow duration-200 mx-2">
+                    <div class="relative group">
+                        <select
+                            class="h-full bg-slate-100 text-slate-600 text-xs px-3 pr-6 border-r border-slate-300 focus:outline-none cursor-pointer hover:bg-slate-200 hover:text-slate-900 transition-colors appearance-none text-center min-w-[60px]">
+                            <option>All</option>
+                            <option>Electronics</option>
+                            <option>Home</option>
+                            <option>Fashion</option>
+                        </select>
+                        <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
+                            <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg>
+                        </div>
+                    </div>
+
+                    <input type="text" placeholder="Search {{ config('app.name', '100X') }}"
+                        class="flex-grow px-4 text-slate-900 bg-white placeholder:text-slate-500 focus:outline-none text-sm font-medium">
+
+                    <button
+                        class="bg-[#febd69] hover:bg-[#fa8900] text-[#131921] px-6 transition-colors duration-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="flex-grow lg:hidden"></div> <!-- Spacer for mobile center-ish logo / right align icons -->
+
+                <!-- Language (Simulated) (Hidden on mobile) -->
+                <div
+                    class="hidden lg:flex items-center gap-1 p-2 border border-transparent hover:border-white rounded-sm cursor-pointer min-w-[60px]">
+                    <img src="https://flagcdn.com/w20/us.png" alt="US" class="w-5 h-3.5 object-cover">
+                    <span class="font-bold text-sm">EN</span>
+                    <svg class="w-2.5 h-2.5 fill-slate-300" viewBox="0 0 20 20">
+                        <path
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                    </svg>
+                </div>
+
+                <!-- Account/Sign In -->
+                @auth
+                    <a href="{{ route('dashboard') }}"
+                        class="flex items-center lg:flex-col lg:justify-center px-2 py-1 border border-transparent hover:border-white rounded-sm cursor-pointer leading-tight lg:min-w-[124px] relative group gap-0.5 sm:gap-1">
+                        <span class="hidden lg:block text-[12px] text-slate-300 h-3.5 leading-tight">Hello,
+                            {{ Auth::user()->name }}</span>
+                        <div class="flex items-center gap-0.5">
+                            <span class="font-bold text-sm leading-tight hidden lg:block">Account & Lists</span>
+                            <span class="text-xs mr-0.5 lg:hidden">{{ explode(' ', Auth::user()->name)[0] }} ›</span>
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="lg:hidden">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            <svg class="hidden lg:block w-2.5 h-2.5 fill-slate-300 text-slate-400 mt-1" viewBox="0 0 20 20">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg>
+                        </div>
+                    </a>
+                @else
+                    <a href="{{ route('login') }}"
+                        class="flex items-center lg:flex-col lg:justify-center px-2 py-1 border border-transparent hover:border-white rounded-sm cursor-pointer leading-tight lg:min-w-[124px] relative group gap-0.5 sm:gap-1">
+                        <span class="hidden lg:block text-[12px] text-slate-300 h-3.5 leading-tight">Hello, sign in</span>
+                        <div class="flex items-center gap-0.5">
+                            <span class="font-bold text-sm leading-tight hidden lg:block">Account & Lists</span>
+                            <span class="text-xs mr-0.5 lg:hidden">Sign in ›</span>
+                            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" class="lg:hidden">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            <svg class="hidden lg:block w-2.5 h-2.5 fill-slate-300 text-slate-400 mt-1" viewBox="0 0 20 20">
+                                <path
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+                            </svg>
+                        </div>
+                    </a>
+                @endauth
+
+                <div
+                    class="hidden md:flex flex-col justify-center px-2 py-1 border border-transparent hover:border-white rounded-sm cursor-pointer leading-tight min-w-[75px]">
+                    <span class="text-[12px] text-slate-300 block h-3.5 leading-tight">Returns</span>
+                    <span class="font-bold text-sm leading-tight">& Orders</span>
+                </div>
+
+                <!-- Cart -->
+                <a href="/cart"
+                    class="flex items-end px-1 sm:px-2 py-1 border border-transparent hover:border-white rounded-sm transition-all gap-1 relative">
+                    <div class="relative flex items-end">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 lg:h-9 lg:w-9 text-white" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <span
+                            class="absolute -top-1 left-[15px] lg:left-[17px] -translate-x-1/2 text-[#f08804] font-bold text-sm lg:text-[16px] leading-none">{{ $cartCount }}</span>
+                    </div>
+                    <span class="font-bold text-sm mb-1 hidden sm:block">Cart</span>
+                </a>
+            </div>
+
+            <!-- Mobile Search Bar (Visible on mobile only) -->
+            <div class="lg:hidden px-4 pb-3">
+                <div
+                    class="flex h-11 rounded-md overflow-hidden ring-2 ring-transparent focus-within:ring-[#fa8900] shadow-sm">
+                    <input type="text" placeholder="Search {{ config('app.name', '100X') }}"
+                        class="flex-grow px-4 text-slate-900 bg-white placeholder:text-slate-500 focus:outline-none text-base font-medium">
+                    <button
+                        class="bg-[#febd69] hover:bg-[#fa8900] text-[#131921] px-5 transition-colors duration-200 flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
-
-
     </header>
 
 

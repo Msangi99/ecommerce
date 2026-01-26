@@ -39,6 +39,24 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <!-- Left Column -->
                     <div class="space-y-6">
+                        <!-- Category -->
+                        <div>
+                            <label for="category_id"
+                                class="block text-sm font-semibold text-slate-700 mb-2">Category</label>
+                            <select name="category_id" id="category_id" required
+                                class="block w-full rounded-lg border-slate-200 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-[#fa8900] focus:border-transparent transition-shadow sm:text-sm p-3 font-medium cursor-pointer">
+                                <option value="">Select a Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ (old('category_id', $product->category_id) == $category->id) ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <p class="text-red-500 text-xs mt-1 font-medium">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         <!-- Model Name -->
                         <div>
                             <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">Model Name</label>
@@ -47,7 +65,7 @@
                                     <svg class="h-5 w-5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                                            d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2-2v14a2 2 0 002 2z" />
                                     </svg>
                                 </div>
                                 <input type="text" name="name" id="name" value="{{ old('name', $product->name) }}"

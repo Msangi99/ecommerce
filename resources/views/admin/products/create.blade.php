@@ -37,6 +37,24 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     <!-- Left Column -->
                     <div class="space-y-6">
+                        <!-- Category -->
+                        <div>
+                            <label for="category_id"
+                                class="block text-sm font-semibold text-slate-700 mb-2">Category</label>
+                            <select name="category_id" id="category_id" required
+                                class="block w-full rounded-lg border-slate-200 bg-slate-50 text-slate-900 focus:ring-2 focus:ring-[#fa8900] focus:border-transparent transition-shadow sm:text-sm p-3 font-medium cursor-pointer">
+                                <option value="">Select a Category</option>
+                                @foreach($categories as $category)
+                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <p class="text-red-500 text-xs mt-1 font-medium">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         <!-- Model Name -->
                         <div>
                             <label for="name" class="block text-sm font-semibold text-slate-700 mb-2">Model Name</label>
