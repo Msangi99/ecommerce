@@ -13,6 +13,7 @@
                             class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-3 ring-2 ring-white shadow-inner bg-gray-100">
                             @if($category->image)
                                 <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}"
+                                    onerror="this.onerror=null; this.src='https://via.placeholder.com/100?text={{ urlencode($category->name) }}'; this.parentElement.classList.add('hide-image-error');"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             @else
                                 <div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-400">
@@ -71,6 +72,7 @@
                         <!-- Image Container -->
                         <div class="aspect-square bg-gray-50 rounded-xl overflow-hidden relative mb-3">
                             <img src="{{ $mainImage }}" alt="{{ $product->name }}"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400?text=No+Available+Image'; this.classList.add('bg-gray-100', 'p-4', 'object-contain');"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
 
                             <!-- Badge -->

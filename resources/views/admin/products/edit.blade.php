@@ -158,7 +158,9 @@
                                 <input type="file" name="images[]" id="images" multiple accept="image/*"
                                     class="block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 transition-all rounded-lg border border-slate-200 bg-slate-50">
                             </div>
-                            <p class="text-xs text-slate-400 mt-2">Accepted formats: JPG, PNG, GIF. Max 2MB per image.
+                            <p class="text-xs text-slate-400 mt-2">Accepted formats: JPG, PNG, GIF, WebP.
+                                <span class="text-xs text-orange-600 font-bold block mt-1">Note: Server limit is
+                                    {{ ini_get('upload_max_filesize') }}. Please upload files smaller than this.</span>
                             </p>
                             @error('images')
                                 <p class="text-red-500 text-xs mt-1 font-medium">{{ $message }}</p>

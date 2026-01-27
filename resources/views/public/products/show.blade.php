@@ -15,6 +15,7 @@
                 <div
                     class="aspect-square bg-slate-50 rounded-xl overflow-hidden mb-4 border border-slate-100 relative group">
                     <img :src="activeImage" alt="{{ $product->name }}"
+                        onerror="this.onerror=null; this.src='https://via.placeholder.com/600?text={{ urlencode($product->name) }}'; this.parentElement.classList.add('bg-gray-100', 'p-8');"
                         class="w-full h-full object-contain mix-blend-multiply transition-transform duration-300 group-hover:scale-105">
                 </div>
 
@@ -207,6 +208,7 @@
                         <!-- Image Container -->
                         <div class="aspect-square bg-gray-100 rounded-lg overflow-hidden relative mb-2">
                             <img src="{{ $rMainImage }}" alt="{{ $related->name }}"
+                                onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=No+Available+Image'; this.classList.add('bg-gray-50', 'p-4', 'object-contain');"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 mix-blend-multiply">
 
                             @if($related->stock_quantity > 0)
