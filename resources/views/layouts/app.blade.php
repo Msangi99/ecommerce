@@ -74,8 +74,8 @@
                 <!-- Logo -->
                 <a href="/"
                     class="flex items-center pt-1 px-2 border border-transparent hover:border-white rounded-sm transition-all duration-200">
-                    <span class="text-xl lg:text-2xl font-bold tracking-tight">100<span
-                            class="text-[#fa8900]">X</span></span>
+                    <span class="text-xl lg:text-2xl font-bold tracking-tight">opticedg<span
+                            class="text-[#fa8900]">eafrica</span></span>
                 </a>
 
                 <!-- Location Picker (Hidden on mobile) -->
@@ -114,7 +114,7 @@
                         </div>
                     </div>
 
-                    <input type="text" placeholder="Search {{ config('app.name', '100X') }}"
+                    <input type="text" placeholder="Search {{ config('app.name', 'OpticEdgeAfrica') }}"
                         class="flex-grow px-4 text-slate-900 bg-white placeholder:text-slate-500 focus:outline-none text-sm font-medium">
 
                     <button
@@ -204,7 +204,7 @@
             <div class="lg:hidden px-4 pb-3">
                 <div
                     class="flex h-11 rounded-md overflow-hidden ring-2 ring-transparent focus-within:ring-[#fa8900] shadow-sm">
-                    <input type="text" placeholder="Search {{ config('app.name', '100X') }}"
+                    <input type="text" placeholder="Search {{ config('app.name', 'OpticEdgeAfrica') }}"
                         class="flex-grow px-4 text-slate-900 bg-white placeholder:text-slate-500 focus:outline-none text-base font-medium">
                     <button
                         class="bg-[#febd69] hover:bg-[#fa8900] text-[#131921] px-5 transition-colors duration-200 flex items-center justify-center">
@@ -242,28 +242,28 @@
                 <ul class="text-sm text-slate-300 space-y-2">
                     <li><a href="#" class="hover:underline">Careers</a></li>
                     <li><a href="#" class="hover:underline">Blog</a></li>
-                    <li><a href="#" class="hover:underline">About 100X</a></li>
+                    <li><a href="#" class="hover:underline">About OpticEdgeAfrica</a></li>
                     <li><a href="#" class="hover:underline">Investor Relations</a></li>
-                    <li><a href="#" class="hover:underline">100X Devices</a></li>
+                    <li><a href="#" class="hover:underline">OpticEdgeAfrica Devices</a></li>
                 </ul>
             </div>
             <div class="flex flex-col gap-3">
                 <h4 class="font-bold text-base text-white">Make Money with Us</h4>
                 <ul class="text-sm text-slate-300 space-y-2">
-                    <li><a href="#" class="hover:underline">Sell products on 100X</a></li>
-                    <li><a href="#" class="hover:underline">Sell on 100X Business</a></li>
-                    <li><a href="#" class="hover:underline">Sell apps on 100X</a></li>
+                    <li><a href="#" class="hover:underline">Sell products on OpticEdgeAfrica</a></li>
+                    <li><a href="#" class="hover:underline">Sell on OpticEdgeAfrica Business</a></li>
+                    <li><a href="#" class="hover:underline">Sell apps on OpticEdgeAfrica</a></li>
                     <li><a href="#" class="hover:underline">Become an Affiliate</a></li>
                     <li><a href="#" class="hover:underline">Advertise Your Products</a></li>
                 </ul>
             </div>
             <div class="flex flex-col gap-3">
-                <h4 class="font-bold text-base text-white">100X Payment Products</h4>
+                <h4 class="font-bold text-base text-white">OpticEdgeAfrica Payment Products</h4>
                 <ul class="text-sm text-slate-300 space-y-2">
-                    <li><a href="#" class="hover:underline">100X Business Card</a></li>
+                    <li><a href="#" class="hover:underline">OpticEdgeAfrica Business Card</a></li>
                     <li><a href="#" class="hover:underline">Shop with Points</a></li>
                     <li><a href="#" class="hover:underline">Reload Your Balance</a></li>
-                    <li><a href="#" class="hover:underline">100X Currency Converter</a></li>
+                    <li><a href="#" class="hover:underline">OpticEdgeAfrica Currency Converter</a></li>
                 </ul>
             </div>
             <div class="flex flex-col gap-3">
@@ -280,7 +280,7 @@
 
         <div class="border-t border-slate-700/50 py-10 flex flex-col items-center gap-6 bg-[#131921]">
             <div class="text-2xl font-bold italic tracking-tighter flex items-baseline gap-1">
-                <span>100</span><span class="text-[#ff9900] text-sm not-italic">X</span>
+                <span>opticedg</span><span class="text-[#ff9900] text-sm not-italic">eafrica</span>
             </div>
 
             <div class="flex flex-wrap justify-center gap-1 sm:gap-6 px-4">
@@ -301,7 +301,7 @@
                 <a href="#" class="hover:underline">Consumer Health Data Privacy Disclosure</a>
                 <a href="#" class="hover:underline">Your Ads Privacy Choices</a>
             </div>
-            <p class="text-[10px] text-slate-500">© 2026 100X, Inc. All rights reserved.</p>
+            <p class="text-[10px] text-slate-500">© 2026 OpticEdgeAfrica, Inc. All rights reserved.</p>
         </div>
     </footer>
 

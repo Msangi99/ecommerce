@@ -1,5 +1,5 @@
 <x-app-layout>
-    <!-- 100X-style Hero Background -->
+    <!-- OpticEdgeAfrica-style Hero Background -->
     <div class="relative bg-gray-200">
         <!-- Background Image/Gradient -->
         <div class="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-100 h-[400px]"></div>

@@ -70,7 +70,8 @@
             <!-- Logo -->
             <a href="{{ route('admin.dashboard') }}"
                 class="flex items-center pt-2 px-2 border border-transparent hover:border-white rounded-sm transition-all duration-200">
-                <span class="text-2xl font-bold tracking-tight">100<span class="text-[#fa8900]">X</span></span>
+                <span class="text-2xl font-bold tracking-tight">opticedg<span
+                        class="text-[#fa8900]">eafrica</span></span>
                 <span class="ml-2 text-xs font-medium bg-[#fa8900] text-[#232f3e] px-2 py-0.5 rounded">ADMIN</span>
             </a>
 
@@ -189,7 +190,8 @@
 
             <!-- Close button (Mobile) -->
             <div class="lg:hidden flex items-center justify-between p-4 border-b border-slate-100">
-                <span class="text-lg font-bold tracking-tight text-[#232f3e]">100<span class="text-[#fa8900]">X</span>
+                <span class="text-lg font-bold tracking-tight text-[#232f3e]">opticedg<span
+                        class="text-[#fa8900]">eafrica</span>
                     Menu</span>
                 <button @click="sidebarOpen = false" class="p-1 rounded hover:bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500" fill="none"
@@ -428,7 +430,7 @@
 
                 <div class="border-t border-slate-700/50 py-8 flex flex-col items-center gap-4 bg-[#131921]">
                     <div class="text-2xl font-bold italic tracking-tighter flex items-baseline gap-1">
-                        <span>100</span><span class="text-[#ff9900] text-sm not-italic">X</span>
+                        <span>opticedg</span><span class="text-[#ff9900] text-sm not-italic">eafrica</span>
                         <span class="text-xs font-normal not-italic ml-2 text-slate-400">Admin Panel</span>
                     </div>
 
@@ -438,7 +440,7 @@
                         <a href="#" class="hover:underline">Admin Guidelines</a>
                         <a href="#" class="hover:underline">Contact Support</a>
                     </div>
-                    <p class="text-[10px] text-slate-500">© 2026 100X, Inc. All rights reserved.</p>
+                    <p class="text-[10px] text-slate-500">© 2026 OpticEdgeAfrica, Inc. All rights reserved.</p>
                 </div>
             </footer>
         </div>

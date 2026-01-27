@@ -81,14 +81,14 @@ new #[Layout('layouts.guest')] class extends Component {
             <div class="w-full border-t border-slate-200"></div>
         </div>
         <div class="relative flex justify-center">
-            <span class="px-2 bg-white text-xs text-slate-500">New to 100X?</span>
+            <span class="px-2 bg-white text-xs text-slate-500">New to OpticEdgeAfrica?</span>
         </div>
     </div>
 
     <div class="mt-4">
         <a href="{{ route('register') }}" wire:navigate
             class="w-full flex justify-center py-2 px-4 border border-slate-300 rounded-md shadow-sm bg-slate-50 text-sm font-medium text-slate-700 hover:bg-slate-100 transition-colors">
-            Create your 100X account
+            Create your OpticEdgeAfrica account
         </a>
     </div>
 

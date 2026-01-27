@@ -91,12 +91,12 @@ new #[Layout('layouts.guest')] class extends Component {
         <div class="mt-6">
             <button type="submit"
                 class="w-full bg-[#fa8900] hover:bg-[#e87b00] text-white font-medium py-2 px-4 rounded-md shadow-sm transition-colors text-sm">
-                Create your 100X account
+                Create your OpticEdgeAfrica account
             </button>
         </div>
 
         <div class="mt-6 text-xs text-slate-600">
-            By creating an account, you agree to 100X's <a href="#"
+            By creating an account, you agree to OpticEdgeAfrica's <a href="#"
                 class="text-blue-600 hover:text-[#fa8900] hover:underline">Conditions of Use</a> and <a href="#"
                 class="text-blue-600 hover:text-[#fa8900] hover:underline">Privacy Notice</a>.
         </div>

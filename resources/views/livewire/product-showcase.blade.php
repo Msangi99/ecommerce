@@ -3,7 +3,7 @@
     @if($showCategories)
         <div class="mb-10">
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-2xl font-bold text-gray-800">Shop by Category</h2>
+                {{-- <h2 class="text-2xl font-bold text-gray-800">Shop by Category</h2> --}}
             </div>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 @foreach($categories as $category)
