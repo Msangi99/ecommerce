@@ -29,8 +29,8 @@ class ProductController extends Controller
             'stock_quantity' => 'required|integer|min:0',
             'rating' => 'required|numeric|min:0|max:5',
             'description' => 'nullable|string',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'images' => 'max:5', // Max 5 files
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'images' => 'nullable|array|max:5', // Max 5 files
         ]);
 
         $imagePaths = [];
@@ -69,8 +69,8 @@ class ProductController extends Controller
             'stock_quantity' => 'required|integer|min:0',
             'rating' => 'required|numeric|min:0|max:5',
             'description' => 'nullable|string',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'images' => 'max:5', // Max 5 files per upload
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'images' => 'nullable|array|max:5', // Max 5 files per upload
         ]);
 
         $imagePaths = $product->images ? $product->images : [];
