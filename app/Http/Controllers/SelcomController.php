@@ -259,7 +259,7 @@ class SelcomController extends Controller
                 if ($paymentStatus === 'COMPLETED') {
                     // Payment successful
                     $selcompay->update(['payment_status' => 'completed']);
-                    $order->update(['payment_status' => 'paid', 'status' => 'processing']);
+                    $order->update(['payment_status' => 'paid', 'status' => 'processed']);
 
                     // Clear the user's cart after successful payment
                     $cart = \App\Models\Cart::where('user_id', $order->user_id)->first();

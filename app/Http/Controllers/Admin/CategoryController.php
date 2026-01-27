@@ -13,7 +13,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::withCount('products')->get();
+        $categories = Category::withCount(['products' => function ($query) {
+            $query->where('stock_quantity', '>', 0);
+        }])->withSum('products', 'stock_quantity')->get();
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -26,9 +28,15 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:categories',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        Category::create($request->all());
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('categories', 'public');
+        }
+
+        Category::create($data);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category created successfully.');
     }
@@ -47,9 +55,15 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:categories,name,' . $category->id,
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $category->update($request->all());
+        $data = $request->all();
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('categories', 'public');
+        }
+
+        $category->update($data);
 
         return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }

@@ -13,6 +13,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+    <!-- Leaflet Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
 
     <!-- Styles / Scripts -->
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
@@ -32,14 +36,14 @@
 
 <body
     class="font-sans antialiased text-slate-900 bg-slate-50 h-full flex flex-col justify-center items-center py-12 sm:px-6 lg:px-8">
-    <div class="sm:mx-auto sm:w-full sm:max-w-md text-center mb-6">
+    <div class="sm:mx-auto sm:w-full sm:max-w-lg text-center mb-6">
         <a href="/" class="flex justify-center items-center gap-1 mb-6">
             <span class="text-3xl font-bold tracking-tight text-[#232f3e]">100<span
                     class="text-[#fa8900]">X</span></span>
         </a>
     </div>
 
-    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="sm:mx-auto sm:w-full sm:max-w-lg">
         <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10 border border-slate-200">
             {{ $slot }}
         </div>

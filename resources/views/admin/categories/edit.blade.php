@@ -5,7 +5,7 @@
             <p class="text-slate-500 text-sm mt-1">Update the name of your category.</p>
         </div>
 
-        <form action="{{ route('admin.categories.update', $category->id) }}" method="POST"
+        <form action="{{ route('admin.categories.update', $category->id) }}" method="POST" enctype="multipart/form-data"
             class="bg-white p-8 rounded-lg shadow-sm border border-slate-200">
             @csrf
             @method('PUT')
@@ -16,6 +16,22 @@
                         class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#fa8900] focus:border-transparent outline-none transition-all"
                         placeholder="e.g. Electronics, Home & Kitchen">
                     @error('name')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="image" class="block text-sm font-medium text-slate-700 mb-1">Cover Image</label>
+                    @if($category->image)
+                        <div class="mb-3">
+                            <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
+                                class="w-24 h-24 object-cover rounded-lg border border-slate-200">
+                        </div>
+                    @endif
+                    <input type="file" name="image" id="image" accept="image/*"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#fa8900] focus:border-transparent outline-none transition-all">
+                    <p class="text-xs text-slate-500 mt-1">Leave empty to keep the current image.</p>
+                    @error('image')
                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>

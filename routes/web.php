@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductController;
+use Livewire\Volt\Volt;
 
 Route::view('/', 'welcome')->name('welcome');
 Route::get('/product/{product}', [App\Http\Controllers\PublicProductController::class, 'show'])->name('product.show');
+Route::get('/category/{category}', [App\Http\Controllers\PublicCategoryController::class, 'show'])->name('category.show');
 
 Route::get('dashboard', function () {
     if (auth()->user()->role === 'admin') {
@@ -14,8 +16,7 @@ Route::get('dashboard', function () {
 })->middleware(['auth', 'verified', 'active'])->name('dashboard');
 
 Route::middleware('guest')->group(function () {
-    Route::get('register/dealer', [App\Http\Controllers\DealerRegisterController::class, 'create'])->name('dealer.register');
-    Route::post('register/dealer', [App\Http\Controllers\DealerRegisterController::class, 'store']);
+    Volt::route('register/dealer', 'pages.auth.dealer-register')->name('dealer.register');
     Route::get('register/dealer/pending', [App\Http\Controllers\DealerRegisterController::class, 'pending'])->name('dealer.pending');
 });
 

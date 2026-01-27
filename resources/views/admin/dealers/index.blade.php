@@ -29,6 +29,8 @@
                                         <th scope="col"
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Email</th>
                                         <th scope="col"
+                                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Phone</th>
+                                        <th scope="col"
                                             class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Status
                                         </th>
                                         <th scope="col"
@@ -51,6 +53,9 @@
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 {{ $dealer->email }}
+                                            </td>
+                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                                {{ $dealer->phone ?? 'N/A' }}
                                             </td>
                                             <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
                                                 <span

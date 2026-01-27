@@ -155,7 +155,7 @@
 
         <!-- Sidebar -->
         <aside :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
-            class="fixed lg:static inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex-shrink-0 flex flex-col h-[calc(100vh-64px)] overflow-y-auto transform transition-transform duration-300 ease-in-out custom-scrollbar mt-[64px] lg:mt-0">
+            class="fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-slate-200 flex-shrink-0 flex flex-col h-[calc(100vh-64px)] overflow-y-auto transform transition-transform duration-300 ease-in-out custom-scrollbar mt-[64px]">
 
             <!-- Close button (Mobile) -->
             <div class="lg:hidden flex items-center justify-between p-4 border-b border-slate-100">
@@ -271,7 +271,7 @@
         </aside>
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col min-h-[calc(100vh-64px)] overflow-y-auto">
+        <div class="flex-1 lg:pl-64 flex flex-col min-h-[calc(100vh-64px)] overflow-y-auto">
             <!-- Main Content -->
             <main class="flex-1 bg-slate-50 p-6">
                 {{ $slot }}

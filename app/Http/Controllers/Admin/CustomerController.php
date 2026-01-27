@@ -16,7 +16,7 @@ class CustomerController extends Controller
             $query->where('role', $request->role);
         }
 
-        $customers = $query->latest()->fastPaginate(20);
+        $customers = $query->latest()->paginate(20);
 
         return view('admin.customers.index', compact('customers'));
     }

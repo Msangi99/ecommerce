@@ -18,8 +18,9 @@
             <select name="status"
                 class="rounded-md border-slate-300 shadow-sm focus:border-[#fa8900] focus:ring-[#fa8900] text-sm">
                 <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
-                <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
-                <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                <option value="processed" {{ $order->status == 'processed' ? 'selected' : '' }}>Processed</option>
+                <option value="on the way" {{ $order->status == 'on the way' ? 'selected' : '' }}>On the way</option>
+                <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>Delivered</option>
                 <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
             </select>
             <button type="submit"

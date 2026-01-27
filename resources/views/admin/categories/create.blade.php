@@ -5,7 +5,7 @@
             <p class="text-slate-500 text-sm mt-1">Create a new category to group your products.</p>
         </div>
 
-        <form action="{{ route('admin.categories.store') }}" method="POST"
+        <form action="{{ route('admin.categories.store') }}" method="POST" enctype="multipart/form-data"
             class="bg-white p-8 rounded-lg shadow-sm border border-slate-200">
             @csrf
             <div class="space-y-6">
@@ -15,6 +15,15 @@
                         class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#fa8900] focus:border-transparent outline-none transition-all"
                         placeholder="e.g. Electronics, Home & Kitchen">
                     @error('name')
+                        <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div>
+                    <label for="image" class="block text-sm font-medium text-slate-700 mb-1">Cover Image</label>
+                    <input type="file" name="image" id="image" accept="image/*"
+                        class="w-full px-4 py-2 border border-slate-300 rounded-md focus:ring-2 focus:ring-[#fa8900] focus:border-transparent outline-none transition-all">
+                    @error('image')
                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                     @enderror
                 </div>

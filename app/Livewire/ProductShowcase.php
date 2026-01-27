@@ -6,15 +6,30 @@ use Livewire\Component;
 
 class ProductShowcase extends Component
 {
-    public $products = [];
+    public $categoryId = null;
+    public $showCategories = true;
 
-    public function mount()
+    public function mount($categoryId = null, $showCategories = true)
     {
-        $this->products = \App\Models\Product::latest()->take(8)->get();
+        $this->categoryId = $categoryId;
+        $this->showCategories = $showCategories;
     }
 
     public function render()
     {
-        return view('livewire.product-showcase');
+        $categories = \App\Models\Category::orderBy('name')->get();
+        
+        $productsQuery = \App\Models\Product::query();
+        
+        if ($this->categoryId) {
+            $productsQuery->where('category_id', $this->categoryId);
+        }
+        
+        $products = $productsQuery->latest()->take(12)->get();
+
+        return view('livewire.product-showcase', [
+            'categories' => $categories,
+            'products' => $products
+        ]);
     }
 }
