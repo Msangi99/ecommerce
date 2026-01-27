@@ -53,6 +53,25 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // Reports
     Route::get('reports', [App\Http\Controllers\Admin\ReportController::class, 'index'])->name('reports.index');
+
+    // System Helpers (for cPanel/Shared Hosting)
+    Route::get('system/storage-link', function () {
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
+            abort(403);
+        }
+        try {
+            // Check if link already exists
+            if (file_exists(public_path('storage'))) {
+                return 'Storage link already exists. <a href="/admin/dashboard">Back</a>';
+            }
+            
+            // Create symlink
+            app('files')->link(storage_path('app/public'), public_path('storage'));
+            return 'Storage link created successfully. <a href="/admin/dashboard">Back</a>';
+        } catch (\Exception $e) {
+            return 'Error creating link: ' . $e->getMessage();
+        }
+    })->name('system.storage-link');
 });
 
 Route::middleware(['auth', 'active'])->group(function () {
