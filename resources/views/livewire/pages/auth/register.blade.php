@@ -11,6 +11,7 @@ use Livewire\Volt\Component;
 new #[Layout('layouts.guest')] class extends Component {
     public string $name = '';
     public string $email = '';
+    public string $phone = '';
     public string $password = '';
     public string $password_confirmation = '';
 
@@ -22,10 +23,12 @@ new #[Layout('layouts.guest')] class extends Component {
         $validated = $this->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
+            'phone' => ['required', 'string', 'max:20', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
+        $validated['role'] = 'customer';
 
         event(new Registered($user = User::create($validated)));
 
@@ -54,6 +57,15 @@ new #[Layout('layouts.guest')] class extends Component {
             <input wire:model="email" id="email" type="email" name="email" required autocomplete="username"
                 class="w-full rounded-md border-slate-300 shadow-sm focus:border-[#fa8900] focus:ring focus:ring-[#fa8900] focus:ring-opacity-50 text-sm py-2">
             <x-input-error :messages="$errors->get('email')" class="mt-2 text-red-600 text-xs" />
+        </div>
+
+        <!-- Phone -->
+        <div class="mb-4">
+            <label for="phone" class="block text-sm font-bold text-slate-900 mb-1">Phone Number</label>
+            <input wire:model="phone" id="phone" type="text" name="phone" required autocomplete="tel"
+                placeholder="07XXXXXXXX"
+                class="w-full rounded-md border-slate-300 shadow-sm focus:border-[#fa8900] focus:ring focus:ring-[#fa8900] focus:ring-opacity-50 text-sm py-2">
+            <x-input-error :messages="$errors->get('phone')" class="mt-2 text-red-600 text-xs" />
         </div>
 
         <!-- Password -->
@@ -98,12 +110,11 @@ new #[Layout('layouts.guest')] class extends Component {
                 </a>
             </p>
         </div>
-</div>
+    </form>
 
-<div class="mt-4 text-center">
-    <a href="{{ route('dealer.register') }}" class="text-xs text-slate-500 hover:text-[#fa8900] hover:underline">
-        Want to become a seller? Register as a Dealer
-    </a>
-</div>
-</form>
+    <div class="mt-4 text-center">
+        <a href="{{ route('dealer.register') }}" class="text-xs text-slate-500 hover:text-[#fa8900] hover:underline">
+            Want to become a seller? Register as a Dealer
+        </a>
+    </div>
 </div>
