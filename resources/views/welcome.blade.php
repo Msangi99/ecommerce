@@ -8,14 +8,15 @@
         <div class="relative max-w-[1500px] mx-auto h-[400px] flex items-center px-4">
             <div class="space-y-4 max-w-lg z-10 p-8 rounded-lg">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">
-                    Professional gear for <br /> <span class="text-[#fa8900]">serious builders.</span>
+                    Premium phones. Trusted deals. <br /> <span class="text-[#fa8900]">Phones you’ll love</span>
                 </h1>
                 <p class="text-lg text-gray-700 font-medium">
-                    Millions of products, fast delivery, and pro-exclusive deals.
+                    Shop the latest smartphones with fast delivery, secure payments, and exclusive offers right at
+                    your fingertips
                 </p>
                 <button
                     class="bg-[#fa8900] hover:bg-[#e87f00] text-white px-8 py-3 rounded-full font-bold shadow-md transition-transform transform hover:scale-105">
-                    Start Shopping
+                    Register as a Dealer
                 </button>
             </div>
             <!-- Decorative Hero Image -->

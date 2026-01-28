@@ -74,8 +74,8 @@
                 <!-- Logo -->
                 <a href="/"
                     class="flex items-center pt-1 px-2 border border-transparent hover:border-white rounded-sm transition-all duration-200">
-                    <span class="text-xl lg:text-2xl font-bold tracking-tight">opticedg<span
-                            class="text-[#fa8900]">eafrica</span></span>
+                    <span class="text-xl lg:text-2xl font-bold tracking-tight">opticedge<span
+                            class="text-[#fa8900]">africa</span></span>
                 </a>
 
                 <!-- Location Picker (Hidden on mobile) -->
@@ -91,41 +91,12 @@
                     </div>
                     <div class="flex flex-col justify-center leading-tight">
                         <span class="text-[12px] text-slate-300 block leading-none">Deliver to</span>
-                        <span class="font-bold text-sm text-white leading-none mt-0.5">New York 10001</span>
+                        <span class="font-bold text-sm text-white leading-none mt-0.5">Dar es salaam</span>
                     </div>
                 </div>
 
                 <!-- Desktop Search (Visible on Desktop only) -->
-                <div
-                    class="hidden lg:flex flex-grow h-10 rounded-md overflow-hidden ring-2 ring-transparent focus-within:ring-[#fa8900] transition-shadow duration-200 mx-2">
-                    <div class="relative group">
-                        <select
-                            class="h-full bg-slate-100 text-slate-600 text-xs px-3 pr-6 border-r border-slate-300 focus:outline-none cursor-pointer hover:bg-slate-200 hover:text-slate-900 transition-colors appearance-none text-center min-w-[60px]">
-                            <option>All</option>
-                            <option>Electronics</option>
-                            <option>Home</option>
-                            <option>Fashion</option>
-                        </select>
-                        <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500">
-                            <svg class="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20">
-                                <path
-                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <input type="text" placeholder="Search {{ config('app.name', 'OpticEdgeAfrica') }}"
-                        class="flex-grow px-4 text-slate-900 bg-white placeholder:text-slate-500 focus:outline-none text-sm font-medium">
-
-                    <button
-                        class="bg-[#febd69] hover:bg-[#fa8900] text-[#131921] px-6 transition-colors duration-200 flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" stroke-width="2.5">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                        </svg>
-                    </button>
-                </div>
+                <livewire:global-search />
 
                 <div class="flex-grow lg:hidden"></div> <!-- Spacer for mobile center-ish logo / right align icons -->
 
@@ -204,7 +175,7 @@
             <div class="lg:hidden px-4 pb-3">
                 <div
                     class="flex h-11 rounded-md overflow-hidden ring-2 ring-transparent focus-within:ring-[#fa8900] shadow-sm">
-                    <input type="text" placeholder="Search {{ config('app.name', 'OpticEdgeAfrica') }}"
+                    <input type="text" placeholder="Search for devices"
                         class="flex-grow px-4 text-slate-900 bg-white placeholder:text-slate-500 focus:outline-none text-base font-medium">
                     <button
                         class="bg-[#febd69] hover:bg-[#fa8900] text-[#131921] px-5 transition-colors duration-200 flex items-center justify-center">
@@ -280,18 +251,18 @@
 
         <div class="border-t border-slate-700/50 py-10 flex flex-col items-center gap-6 bg-[#131921]">
             <div class="text-2xl font-bold italic tracking-tighter flex items-baseline gap-1">
-                <span>opticedg</span><span class="text-[#ff9900] text-sm not-italic">eafrica</span>
+                <span>opticedge</span><span class="text-[#ff9900] text-sm not-italic">africa</span>
             </div>
 
             <div class="flex flex-wrap justify-center gap-1 sm:gap-6 px-4">
                 <button
                     class="border border-slate-500 rounded px-4 py-1.5 text-xs text-slate-300 hover:border-slate-300">English</button>
                 <button
-                    class="border border-slate-500 rounded px-4 py-1.5 text-xs text-slate-300 hover:border-slate-300">$
-                    USD - U.S. Dollar</button>
+                    class="border border-slate-500 rounded px-4 py-1.5 text-xs text-slate-300 hover:border-slate-300">
+                    Tshiling</button>
                 <button
                     class="border border-slate-500 rounded px-4 py-1.5 text-xs text-slate-300 hover:border-slate-300 flex items-center gap-2">
-                    <img src="https://flagcdn.com/w20/us.png" class="w-4" alt=""> United States
+                    <img src="https://flagcdn.com/w20/tz.png" class="w-4" alt=""> Tanzania
                 </button>
             </div>
 

@@ -70,7 +70,7 @@
             <!-- Logo -->
             <a href="/"
                 class="flex items-center pt-2 px-2 border border-transparent hover:border-white rounded-sm transition-all duration-200">
-                <span class="text-2xl font-bold tracking-tight">100<span class="text-[#fa8900]">X</span></span>
+                <span class="text-2xl font-bold tracking-tight">opticedg<span class="text-[#fa8900]">eafrica</span></span>
             </a>
 
             <!-- Spacer -->
@@ -159,7 +159,7 @@
 
             <!-- Close button (Mobile) -->
             <div class="lg:hidden flex items-center justify-between p-4 border-b border-slate-100">
-                <span class="text-lg font-bold tracking-tight text-[#232f3e]">100<span class="text-[#fa8900]">X</span>
+                <span class="text-lg font-bold tracking-tight text-[#232f3e]">opticedg<span class="text-[#fa8900]">eafrica</span>
                     Menu</span>
                 <button @click="sidebarOpen = false" class="p-1 rounded hover:bg-slate-100">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-slate-500" fill="none"
