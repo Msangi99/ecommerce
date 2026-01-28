@@ -2,10 +2,10 @@
     <!-- OpticEdgeAfrica-style Hero Background -->
     <div class="relative bg-gray-200">
         <!-- Background Image/Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-100 h-[400px]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-300 to-gray-100 h-[520px]"></div>
 
         <!-- Hero Content (Carousel Placeholder) -->
-        <div class="relative max-w-[1500px] mx-auto h-[400px] flex items-center px-4">
+        <div class="relative max-w-[1500px] mx-auto h-[520px] flex items-center px-4">
             <div class="space-y-4 max-w-lg z-10 p-8 rounded-lg">
                 <h1 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight">
                     Premium phones. Trusted deals. <br /> <span class="text-[#fa8900]">Phones you’ll love</span>
@@ -14,10 +14,10 @@
                     Shop the latest smartphones with fast delivery, secure payments, and exclusive offers right at
                     your fingertips
                 </p>
-                <button
-                    class="bg-[#fa8900] hover:bg-[#e87f00] text-white px-8 py-3 rounded-full font-bold shadow-md transition-transform transform hover:scale-105">
+                <a href="{{ route('dealer.register') }}"
+                    class="inline-block bg-[#fa8900] hover:bg-[#e87f00] text-white px-8 py-3 rounded-full font-bold shadow-md transition-transform transform hover:scale-105">
                     Register as a Dealer
-                </button>
+                </a>
             </div>
             <!-- Decorative Hero Image -->
             <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?q=80&w=1000&auto=format&fit=crop"

@@ -259,7 +259,7 @@
                     class="border border-slate-500 rounded px-4 py-1.5 text-xs text-slate-300 hover:border-slate-300">English</button>
                 <button
                     class="border border-slate-500 rounded px-4 py-1.5 text-xs text-slate-300 hover:border-slate-300">
-                    Tshiling</button>
+                    TZS</button>
                 <button
                     class="border border-slate-500 rounded px-4 py-1.5 text-xs text-slate-300 hover:border-slate-300 flex items-center gap-2">
                     <img src="https://flagcdn.com/w20/tz.png" class="w-4" alt=""> Tanzania
