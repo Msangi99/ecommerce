@@ -299,6 +299,40 @@
                     </div>
                 </div>
 
+                <!-- Stock Management Section -->
+                <div>
+                    <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Stock Management</h3>
+                    <div class="space-y-1">
+                        <div x-data="{ open: false }">
+                            <button @click="open = !open"
+                                class="w-full flex items-center justify-between px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                                <div class="flex items-center gap-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                                    </svg>
+                                    Stock
+                                </div>
+                                <svg class="w-4 h-4 text-slate-400 transition-transform" :class="{ 'rotate-180': open }"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                            <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
+                                <a href="{{ route('admin.stock.purchases') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Purchases</a>
+                                <a href="{{ route('admin.stock.distribution') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Distribution</a>
+                                <a href="{{ route('admin.stock.agent-sales') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Agent Sales</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Operations Section -->
                 <div>
                     <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Operations</h3>
