@@ -169,6 +169,8 @@
                 class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Orders</a>
             <a href="{{ route('admin.dealers.index') }}"
                 class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Dealers</a>
+            <a href="{{ route('admin.agents.index') }}"
+                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Agents</a>
             <a href="{{ route('admin.reports.index') }}"
                 class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Reports</a>
             <a href="{{ route('admin.settings.index') }}"
@@ -293,6 +295,8 @@
                                     class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Customers</a>
                                 <a href="{{ route('admin.dealers.index') }}"
                                     class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Dealers</a>
+                                <a href="{{ route('admin.agents.index') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Agents</a>
                             </div>
                         </div>
 
@@ -326,6 +330,8 @@
                                     class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Purchases</a>
                                 <a href="{{ route('admin.stock.distribution') }}"
                                     class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Distribution</a>
+                                <a href="{{ route('admin.agents.assign-products') }}"
+                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Assign to Agent</a>
                                 <a href="{{ route('admin.stock.agent-sales') }}"
                                     class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Agent Sales</a>
                             </div>

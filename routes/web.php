@@ -12,12 +12,16 @@ Route::get('dashboard', function () {
     if (auth()->user()->role === 'admin') {
         return redirect()->route('admin.dashboard');
     }
+    if (auth()->user()->role === 'agent') {
+        return redirect()->route('agent.dashboard');
+    }
     return view('dashboard');
 })->middleware(['auth', 'verified', 'active'])->name('dashboard');
 
 Route::middleware('guest')->group(function () {
     Volt::route('register/dealer', 'pages.auth.dealer-register')->name('dealer.register');
     Route::get('register/dealer/pending', [App\Http\Controllers\DealerRegisterController::class , 'pending'])->name('dealer.pending');
+    Volt::route('register/agent', 'pages.auth.agent-register')->name('agent.register');
 });
 
 Route::view('profile', 'profile')
@@ -42,6 +46,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         Route::patch('dealers/{user}/approve', [App\Http\Controllers\Admin\DealerController::class , 'approve'])->name('dealers.approve');
         Route::patch('dealers/{user}/reject', [App\Http\Controllers\Admin\DealerController::class , 'reject'])->name('dealers.reject');
 
+        // Agents Management
+        Route::get('agents', [App\Http\Controllers\Admin\AgentController::class, 'index'])->name('agents.index');
+        Route::get('agents/create', [App\Http\Controllers\Admin\AgentController::class, 'create'])->name('agents.create');
+        Route::post('agents', [App\Http\Controllers\Admin\AgentController::class, 'store'])->name('agents.store');
+        Route::get('agents/assign-products', [App\Http\Controllers\Admin\AgentController::class, 'assignProductsForm'])->name('agents.assign-products');
+        Route::post('agents/assign-products', [App\Http\Controllers\Admin\AgentController::class, 'storeAssignment'])->name('agents.store-assignment');
+        Route::get('agents/{agent}', [App\Http\Controllers\Admin\AgentController::class, 'show'])->name('agents.show');
+
         // Orders
         Route::resource('orders', App\Http\Controllers\Admin\OrderController::class)->only(['index', 'show', 'update']);
 
@@ -58,8 +70,26 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         // Stock Management
         Route::prefix('stock')->name('stock.')->group(function () {
             Route::get('purchases', [App\Http\Controllers\Admin\StockController::class , 'purchases'])->name('purchases');
+            Route::get('purchases/create', [App\Http\Controllers\Admin\StockController::class , 'createPurchase'])->name('create-purchase');
+            Route::post('purchases', [App\Http\Controllers\Admin\StockController::class , 'storePurchase'])->name('store-purchase');
+            Route::get('purchases/{id}/edit', [App\Http\Controllers\Admin\StockController::class , 'editPurchase'])->name('edit-purchase');
+            Route::put('purchases/{id}', [App\Http\Controllers\Admin\StockController::class , 'updatePurchase'])->name('update-purchase');
+            Route::delete('purchases/{id}', [App\Http\Controllers\Admin\StockController::class , 'destroyPurchase'])->name('destroy-purchase');
+            
+            // Distribution Sales
             Route::get('distribution', [App\Http\Controllers\Admin\StockController::class , 'distribution'])->name('distribution');
+            Route::get('distribution/create', [App\Http\Controllers\Admin\StockController::class, 'createDistribution'])->name('create-distribution');
+            Route::post('distribution', [App\Http\Controllers\Admin\StockController::class, 'storeDistribution'])->name('store-distribution');
+            Route::patch('distribution/{id}/status', [App\Http\Controllers\Admin\StockController::class, 'updateDistributionStatus'])->name('distribution-update-status');
+
+            // Agent Sales
             Route::get('agent-sales', [App\Http\Controllers\Admin\StockController::class , 'agentSales'])->name('agent-sales');
+            Route::get('agent-sales/create', [App\Http\Controllers\Admin\StockController::class, 'createAgentSale'])->name('create-agent-sale');
+            Route::post('agent-sales', [App\Http\Controllers\Admin\StockController::class, 'storeAgentSale'])->name('store-agent-sale');
+            Route::patch('agent-sales/{id}/commission', [App\Http\Controllers\Admin\StockController::class, 'updateAgentSaleCommission'])->name('agent-sales-update-commission');
+
+            Route::get('shop-records', [App\Http\Controllers\Admin\StockController::class , 'shopRecords'])->name('shop-records');
+            Route::get('payables', [App\Http\Controllers\Admin\StockController::class , 'payables'])->name('payables');
         }
         );
 
@@ -84,6 +114,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         }
         )->name('system.storage-link');
     });
+
+// Agent dashboard and sales (role = agent)
+Route::middleware(['auth', 'verified', 'active', 'agent'])->prefix('agent')->name('agent.')->group(function () {
+    Route::get('dashboard', [App\Http\Controllers\AgentController::class, 'dashboard'])->name('dashboard');
+    Route::get('assignments/{assignment}/record-sale', [App\Http\Controllers\AgentController::class, 'recordSaleForm'])->name('record-sale-form');
+    Route::post('record-sale', [App\Http\Controllers\AgentController::class, 'recordSale'])->name('record-sale');
+});
 
 Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/cart', [App\Http\Controllers\CartController::class , 'index'])->name('cart.index');

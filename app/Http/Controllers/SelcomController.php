@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Selcompay;
+use App\Services\DistributionSaleService;
 use Bryceandy\Selcom\Facades\Selcom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -260,6 +261,12 @@ class SelcomController extends Controller
                     // Payment successful
                     $selcompay->update(['payment_status' => 'completed']);
                     $order->update(['payment_status' => 'paid', 'status' => 'processed']);
+
+                    // When dealer pays with Selcom, create distribution sales with status complete
+                    $order->load(['items.product.category', 'user']);
+                    if ($order->user && $order->user->role === 'dealer') {
+                        app(DistributionSaleService::class)->createFromOrder($order, 'complete');
+                    }
 
                     // Clear the user's cart after successful payment
                     $cart = \App\Models\Cart::where('user_id', $order->user_id)->first();

@@ -92,9 +92,12 @@ new #[Layout('layouts.guest')] class extends Component {
         </a>
     </div>
 
-    <div class="mt-4 text-center">
-        <a href="{{ route('dealer.register') }}" class="text-xs text-slate-500 hover:text-[#fa8900] hover:underline">
+    <div class="mt-4 text-center space-y-1">
+        <a href="{{ route('dealer.register') }}" class="block text-xs text-slate-500 hover:text-[#fa8900] hover:underline">
             Want to become a seller? Register as a Dealer
+        </a>
+        <a href="{{ route('agent.register') }}" wire:navigate class="block text-xs text-slate-500 hover:text-[#fa8900] hover:underline">
+            Register as an Agent
         </a>
     </div>
 </div>

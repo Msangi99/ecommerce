@@ -24,7 +24,21 @@ class User extends Authenticatable
         'status',
         'business_name',
         'phone',
+        'how_did_you_hear',
+        'referred_by',
     ];
+
+    /** Friend/referrer who made this user (dealer) join – gets commission on first dealer purchase */
+    public function referrer()
+    {
+        return $this->belongsTo(User::class, 'referred_by');
+    }
+
+    /** Dealers referred by this user (when this user is the "seller" who gets commission) */
+    public function referredDealers()
+    {
+        return $this->hasMany(User::class, 'referred_by');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('payment_status')->default('pending')->after('status');
+            $table->string('payment_status', 100)->default('pending')->after('status');
             $table->foreignId('address_id')->nullable()->after('payment_method')->constrained('addresses')->onDelete('set null');
         });
     }

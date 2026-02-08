@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Services\DistributionSaleService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
@@ -96,6 +97,12 @@ class OrderController extends Controller
         // For COD, clear cart immediately and decrement stock
         $cart->items()->delete();
         $cart->delete();
+
+        // When dealer pays with cash/COD, create distribution sales with status pending
+        if (Auth::user()->role === 'dealer') {
+            $order->load(['items.product.category', 'user']);
+            app(DistributionSaleService::class)->createFromOrder($order, 'pending');
+        }
 
         return redirect()->route('orders.index')->with('success', 'Order placed successfully!');
     }

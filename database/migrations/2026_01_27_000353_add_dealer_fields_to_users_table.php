@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('business_name')->nullable()->after('name');
-            $table->string('business_type')->nullable()->after('business_name');
+            $table->string('business_name', 100)->nullable()->after('name');
+            $table->string('business_type', 100)->nullable()->after('business_name');
             $table->foreignId('category_id')->nullable()->constrained('categories')->after('business_type');
-            $table->string('phone')->nullable()->after('category_id');
+            $table->string('phone', 100)->nullable()->after('category_id');
         });
     }
 
