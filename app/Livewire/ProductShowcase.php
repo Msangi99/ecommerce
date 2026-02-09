@@ -25,7 +25,7 @@ class ProductShowcase extends Component
             $productsQuery->where('category_id', $this->categoryId);
         }
         
-        $products = $productsQuery->latest()->take(12)->get();
+        $products = $productsQuery->with('category')->latest()->take(12)->get();
 
         return view('livewire.product-showcase', [
             'categories' => $categories,

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'OpticEdgeAfrica'),
+    'name' => env('APP_NAME', 'opticedgeafrica'),
 
     /*
     |--------------------------------------------------------------------------

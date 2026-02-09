@@ -62,16 +62,21 @@
             <div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 @foreach($products as $product)
                     @php
-                        $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
-                        $mainImage = !empty($images) && count($images) > 0 ? Storage::url($images[0]) : 'https://via.placeholder.com/300x300?text=No+Image';
+                        $cardImage = null;
+                        if ($product->category && $product->category->image) {
+                            $cardImage = Storage::url($product->category->image);
+                        } else {
+                            $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+                            $cardImage = !empty($images) && count($images) > 0 ? Storage::url($images[0]) : 'https://via.placeholder.com/300x300?text=No+Image';
+                        }
                     @endphp
 
                     <a href="{{ route('product.show', $product->id) }}"
                         class="group flex flex-col h-full bg-white hover:shadow-xl rounded-2xl border border-gray-100 transition-all duration-300 overflow-hidden relative p-3">
 
-                        <!-- Image Container -->
+                        <!-- Image Container (uses category image when available) -->
                         <div class="aspect-square bg-gray-50 rounded-xl overflow-hidden relative mb-3">
-                            <img src="{{ $mainImage }}" alt="{{ $product->name }}"
+                            <img src="{{ $cardImage }}" alt="{{ $product->name }}"
                                 onerror="this.onerror=null; this.src='https://via.placeholder.com/400x400?text=No+Available+Image'; this.classList.add('bg-gray-100', 'p-4', 'object-contain');"
                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
 

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'opticedgeafrica') }}</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -200,55 +200,6 @@
 
     <!-- Footer -->
     <footer class="mt-12 bg-[#232f3e] text-white border-t border-slate-700">
-        <!-- Back to top -->
-        <a href="#"
-            class="block text-center py-4 bg-[#37475a] hover:bg-[#485769] transition-colors text-sm font-medium tracking-wide">
-            Back to top
-        </a>
-
-        <!-- Footer Links -->
-        <div class="max-w-[1000px] mx-auto grid grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-10 py-12 px-6">
-            <div class="flex flex-col gap-3">
-                <h4 class="font-bold text-base text-white">Get to Know Us</h4>
-                <ul class="text-sm text-slate-300 space-y-2">
-                    <li><a href="#" class="hover:underline">Careers</a></li>
-                    <li><a href="#" class="hover:underline">Blog</a></li>
-                    <li><a href="#" class="hover:underline">About OpticEdgeAfrica</a></li>
-                    <li><a href="#" class="hover:underline">Investor Relations</a></li>
-                    <li><a href="#" class="hover:underline">OpticEdgeAfrica Devices</a></li>
-                </ul>
-            </div>
-            <div class="flex flex-col gap-3">
-                <h4 class="font-bold text-base text-white">Make Money with Us</h4>
-                <ul class="text-sm text-slate-300 space-y-2">
-                    <li><a href="#" class="hover:underline">Sell products on OpticEdgeAfrica</a></li>
-                    <li><a href="#" class="hover:underline">Sell on OpticEdgeAfrica Business</a></li>
-                    <li><a href="#" class="hover:underline">Sell apps on OpticEdgeAfrica</a></li>
-                    <li><a href="#" class="hover:underline">Become an Affiliate</a></li>
-                    <li><a href="#" class="hover:underline">Advertise Your Products</a></li>
-                </ul>
-            </div>
-            <div class="flex flex-col gap-3">
-                <h4 class="font-bold text-base text-white">OpticEdgeAfrica Payment Products</h4>
-                <ul class="text-sm text-slate-300 space-y-2">
-                    <li><a href="#" class="hover:underline">OpticEdgeAfrica Business Card</a></li>
-                    <li><a href="#" class="hover:underline">Shop with Points</a></li>
-                    <li><a href="#" class="hover:underline">Reload Your Balance</a></li>
-                    <li><a href="#" class="hover:underline">OpticEdgeAfrica Currency Converter</a></li>
-                </ul>
-            </div>
-            <div class="flex flex-col gap-3">
-                <h4 class="font-bold text-base text-white">Let Us Help You</h4>
-                <ul class="text-sm text-slate-300 space-y-2">
-                    <li><a href="#" class="hover:underline">Your Account</a></li>
-                    <li><a href="#" class="hover:underline">Your Orders</a></li>
-                    <li><a href="#" class="hover:underline">Shipping Rates & Policies</a></li>
-                    <li><a href="#" class="hover:underline">Returns & Replacements</a></li>
-                    <li><a href="#" class="hover:underline">Manage Your Content and Devices</a></li>
-                </ul>
-            </div>
-        </div>
-
         <div class="border-t border-slate-700/50 py-10 flex flex-col items-center gap-6 bg-[#131921]">
             <div class="text-2xl font-bold italic tracking-tighter flex items-baseline gap-1">
                 <span>opticedge</span><span class="text-[#ff9900] text-sm not-italic">africa</span>
