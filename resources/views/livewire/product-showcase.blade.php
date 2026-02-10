@@ -12,7 +12,7 @@
                         <div
                             class="w-20 h-20 md:w-24 md:h-24 rounded-full overflow-hidden mb-3 ring-2 ring-white shadow-inner bg-gray-100">
                             @if($category->image)
-                                <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}"
+                                <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
                                     onerror="this.onerror=null; this.src='https://via.placeholder.com/100?text={{ urlencode($category->name) }}'; this.parentElement.classList.add('hide-image-error');"
                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             @else
@@ -64,10 +64,10 @@
                     @php
                         $cardImage = null;
                         if ($product->category && $product->category->image) {
-                            $cardImage = Storage::url($product->category->image);
+                            $cardImage = asset('storage/' . $product->category->image);
                         } else {
                             $images = is_string($product->images) ? json_decode($product->images, true) : $product->images;
-                            $cardImage = !empty($images) && count($images) > 0 ? Storage::url($images[0]) : 'https://via.placeholder.com/300x300?text=No+Image';
+                            $cardImage = !empty($images) && count($images) > 0 ? asset('storage/' . $images[0]) : 'https://via.placeholder.com/300x300?text=No+Image';
                         }
                     @endphp
 

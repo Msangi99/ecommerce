@@ -21,7 +21,7 @@
                     <div
                         class="w-32 h-32 md:w-48 md:h-48 rounded-2xl overflow-hidden bg-gray-100 shadow-inner flex-shrink-0">
                         @if($category->image)
-                            <img src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}"
+                            <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}"
                                 class="w-full h-full object-cover">
                         @else
                             <div class="w-full h-full flex items-center justify-center text-gray-300">
