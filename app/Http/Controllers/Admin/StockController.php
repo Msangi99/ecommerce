@@ -81,6 +81,8 @@ class StockController extends Controller
             'paid_date' => 'nullable|date',
             'paid_amount' => 'nullable|numeric|min:0',
             'payment_status' => 'required|in:pending,paid,partial',
+            'images' => 'required|array|min:3',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         // Find or create the product based on category and model name
@@ -90,19 +92,32 @@ class StockController extends Controller
                 'name' => $validated['model']
             ],
             [
-                // Default values for other required fields if any (e.g., slug depending on model events, price, etc.)
-                // Assuming 'price' is not strictly required here or can be updated later, 
-                // but if Product model requires price, we might need to set a default or use unit_price
-                'price' => 0, // Default placeholders if needed
-                'quantity' => 0, // Initial stock, will be incremented by purchase logic if we had a stock observer
+                'price' => $validated['unit_price'],
+                'stock_quantity' => 0,
+                'rating' => 5.0,
                 'description' => 'Auto-created from purchase',
-                'image' => null 
+                'images' => [],
             ]
         );
+
+        // Upload and save product images
+        $imagePaths = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('products', 'public');
+                    $imagePaths[] = $path;
+                }
+            }
+        }
+        if (!empty($imagePaths)) {
+            $product->update(['images' => $imagePaths]);
+        }
 
         // Remove non-purchase fields from validated data
         unset($validated['category_id']);
         unset($validated['model']);
+        unset($validated['images']);
 
         // Add product_id
         $validated['product_id'] = $product->id;
@@ -114,9 +129,6 @@ class StockController extends Controller
         $validated['paid_amount'] = $validated['paid_amount'] ?? 0;
 
         Purchase::create($validated);
-        
-        // Optional: Update product stock quantity here if not handled by Observers
-        // $product->increment('quantity', $validated['quantity']);
 
         return redirect()->route('admin.stock.purchases')->with('success', 'Purchase recorded successfully.');
     }
@@ -139,22 +151,41 @@ class StockController extends Controller
 
     public function updatePurchase(Request $request, $id)
     {
-        $purchase = Purchase::findOrFail($id);
-        
-        $validated = $request->validate([
+        $purchase = Purchase::with('product')->findOrFail($id);
+
+        $rules = [
             'paid_date' => 'nullable|date',
             'paid_amount' => 'nullable|numeric|min:0',
             'payment_status' => 'required|in:pending,paid,partial',
-        ]);
+        ];
+        if ($request->hasFile('images')) {
+            $rules['images'] = 'required|array|min:3';
+            $rules['images.*'] = 'image|mimes:jpeg,png,jpg,gif,webp|max:5120';
+        }
+        $validated = $request->validate($rules);
 
-        // Only update payment details
+        // Update product images if new ones uploaded
+        if ($request->hasFile('images') && $purchase->product) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                if ($image->isValid()) {
+                    $path = $image->store('products', 'public');
+                    $imagePaths[] = $path;
+                }
+            }
+            if (!empty($imagePaths)) {
+                $purchase->product->update(['images' => $imagePaths]);
+            }
+        }
+
+        // Update payment details
         $purchase->update([
             'paid_date' => $validated['paid_date'],
             'paid_amount' => $validated['paid_amount'] ?? 0,
             'payment_status' => $validated['payment_status']
         ]);
 
-        return redirect()->route('admin.stock.purchases')->with('success', 'Purchase updated successfully (Payment details only).');
+        return redirect()->route('admin.stock.purchases')->with('success', 'Purchase updated successfully.');
     }
 
     public function destroyPurchase($id)

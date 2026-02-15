@@ -163,8 +163,6 @@
             class="bg-[#19212c] flex items-center gap-1 py-1 px-4 text-sm font-medium overflow-x-auto whitespace-nowrap custom-scrollbar">
             <a href="{{ route('admin.dashboard') }}"
                 class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Dashboard</a>
-            <a href="{{ route('admin.products.index') }}"
-                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Products</a>
             <a href="{{ route('admin.orders.index') }}"
                 class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Orders</a>
             <a href="{{ route('admin.dealers.index') }}"
@@ -173,6 +171,8 @@
                 class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Agents</a>
             <a href="{{ route('admin.reports.index') }}"
                 class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Reports</a>
+            <a href="{{ route('admin.expenses.index') }}"
+                class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Expenses</a>
             <a href="{{ route('admin.settings.index') }}"
                 class="p-1 px-3 border border-transparent hover:border-white rounded-sm transition-colors">Settings</a>
         </div>
@@ -248,12 +248,6 @@
                                 </svg>
                             </button>
                             <div x-show="open" x-cloak class="pl-10 space-y-1 mt-1 border-l-2 border-slate-100 ml-4">
-                                <a href="{{ route('admin.products.index') }}"
-                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">All
-                                    Products</a>
-                                <a href="{{ route('admin.products.create') }}"
-                                    class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Add
-                                    Product</a>
                                 <a href="{{ route('admin.categories.index') }}"
                                     class="block px-2 py-1.5 text-sm text-slate-600 hover:text-slate-900">Categories</a>
                             </div>
@@ -343,6 +337,16 @@
                 <div>
                     <h3 class="px-2 text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">Operations</h3>
                     <div class="space-y-1">
+                        <a href="{{ route('admin.expenses.index') }}"
+                            class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-slate-400 group-hover:text-slate-600" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            Expenses
+                        </a>
                         <a href="{{ route('admin.reports.index') }}"
                             class="flex items-center gap-3 px-2 py-2 text-sm font-medium text-slate-700 rounded-md hover:bg-slate-50 group">
                             <svg xmlns="http://www.w3.org/2000/svg"

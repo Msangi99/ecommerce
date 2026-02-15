@@ -34,7 +34,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
             $totalOrders = \App\Models\Order::count();
             $totalProducts = \App\Models\Product::count();
             $recentOrders = \App\Models\Order::with('user')->latest()->take(5)->get();
-            return view('admin.dashboard', compact('totalCustomers', 'totalOrders', 'totalProducts', 'recentOrders'));
+            $financialMetrics = app(\App\Services\DashboardFinancialService::class)->getMetrics();
+            return view('admin.dashboard', compact('totalCustomers', 'totalOrders', 'totalProducts', 'recentOrders', 'financialMetrics'));
         }
         )->name('dashboard');
         Route::resource('products', ProductController::class);
@@ -66,6 +67,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
         // Reports
         Route::get('reports', [App\Http\Controllers\Admin\ReportController::class , 'index'])->name('reports.index');
+
+        // Expenses
+        Route::resource('expenses', App\Http\Controllers\Admin\ExpenseController::class)->except(['show']);
 
         // Stock Management
         Route::prefix('stock')->name('stock.')->group(function () {

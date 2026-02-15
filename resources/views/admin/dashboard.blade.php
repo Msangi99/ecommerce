@@ -63,6 +63,62 @@
             </a>
         </div>
 
+        <!-- Financial Metrics -->
+        @if(isset($financialMetrics))
+        <div class="mt-8 bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+            <div class="px-6 py-4 border-b border-slate-200">
+                <h3 class="font-bold text-slate-800">Financial Summary</h3>
+                <p class="text-sm text-slate-500 mt-0.5">Payables, receivables, stock value, and profit overview.</p>
+            </div>
+            <div class="p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="p-4 rounded-lg bg-amber-50 border border-amber-100">
+                        <p class="text-sm font-medium text-slate-600">Payables</p>
+                        <p class="text-xl font-bold text-slate-900 mt-1">{{ number_format($financialMetrics['payables'], 0) }} TZS</p>
+                        <p class="text-xs text-slate-500 mt-1">Total amount paid in purchases</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-blue-50 border border-blue-100">
+                        <p class="text-sm font-medium text-slate-600">Receivables</p>
+                        <p class="text-xl font-bold text-slate-900 mt-1">{{ number_format($financialMetrics['receivables'], 0) }} TZS</p>
+                        <p class="text-xs text-slate-500 mt-1">All amount from Distribution Sales</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-emerald-50 border border-emerald-100">
+                        <p class="text-sm font-medium text-slate-600">Stock in Hand Value</p>
+                        <p class="text-xl font-bold text-slate-900 mt-1">{{ number_format($financialMetrics['stock_in_hand_value'], 0) }} TZS</p>
+                        <p class="text-xs text-slate-500 mt-1">Total value of our stock</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-violet-50 border border-violet-100">
+                        <p class="text-sm font-medium text-slate-600">Cash in Hand</p>
+                        <p class="text-xl font-bold text-slate-900 mt-1">{{ number_format($financialMetrics['cash_in_hand'], 0) }} TZS</p>
+                        <p class="text-xs text-slate-500 mt-1">Total value of stocks given to agents</p>
+                    </div>
+                </div>
+                <div class="mt-4 pt-4 border-t border-slate-200 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="p-4 rounded-lg bg-slate-50 border border-slate-200">
+                        <p class="text-sm font-medium text-slate-600">Total Value</p>
+                        <p class="text-xl font-bold text-slate-900 mt-1">{{ number_format($financialMetrics['total_value'], 0) }} TZS</p>
+                        <p class="text-xs text-slate-500 mt-1">Receivables + Stock in Hand + Cash in Hand</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-green-50 border border-green-100">
+                        <p class="text-sm font-medium text-slate-600">Gross Profit</p>
+                        <p class="text-xl font-bold text-green-800 mt-1">{{ number_format($financialMetrics['gross_profit'], 0) }} TZS</p>
+                        <p class="text-xs text-slate-500 mt-1">Distribution Sales + Agent Sales profit</p>
+                    </div>
+                    <div class="p-4 rounded-lg bg-red-50 border border-red-100">
+                        <p class="text-sm font-medium text-slate-600">Total Expenses</p>
+                        <p class="text-xl font-bold text-red-800 mt-1">{{ number_format($financialMetrics['total_expenses'], 0) }} TZS</p>
+                        <p class="text-xs text-slate-500 mt-1">Commission from Distribution + Agent Sales</p>
+                    </div>
+                    <div class="p-4 rounded-lg {{ $financialMetrics['net_profit'] >= 0 ? 'bg-green-50 border-green-100' : 'bg-red-50 border-red-100' }} border">
+                        <p class="text-sm font-medium text-slate-600">Net Profit</p>
+                        <p class="text-xl font-bold mt-1 {{ $financialMetrics['net_profit'] >= 0 ? 'text-green-800' : 'text-red-800' }}">{{ number_format($financialMetrics['net_profit'], 0) }} TZS</p>
+                        <p class="text-xs text-slate-500 mt-1">Gross profit − Total expenses</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+
         <!-- Recent Orders -->
         <div class="mt-8 bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
             <div class="px-6 py-4 border-b border-slate-200 flex justify-between items-center">

@@ -10,7 +10,7 @@
             </div>
 
             <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-                <form action="{{ route('admin.stock.update-purchase', $purchase->id) }}" method="POST">
+                <form action="{{ route('admin.stock.update-purchase', $purchase->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     
@@ -62,6 +62,34 @@
                         <div class="col-span-2">
                             <label for="total_amount" class="block text-sm font-medium text-slate-700 mb-1">Total Purchase Value</label>
                             <input type="text" id="total_amount" readonly class="w-full rounded-md border-slate-300 bg-slate-100 shadow-sm cursor-not-allowed font-bold text-gray-700" value="{{ number_format($purchase->quantity * $purchase->unit_price, 2) }}">
+                        </div>
+
+                        @php
+                            $productImages = [];
+                            if ($purchase->product) {
+                                $productImages = is_string($purchase->product->images ?? null) ? json_decode($purchase->product->images, true) : ($purchase->product->images ?? []);
+                                $productImages = is_array($productImages) ? $productImages : [];
+                            }
+                        @endphp
+                        <!-- Product Images -->
+                        <div class="col-span-2">
+                            <label for="images" class="block text-sm font-medium text-slate-700 mb-1">Product Images</label>
+                            @if(count($productImages) > 0)
+                                <div class="flex flex-wrap gap-2 mb-2">
+                                    @foreach($productImages as $img)
+                                        <img src="{{ asset('storage/' . $img) }}" alt="Product" class="w-16 h-16 object-cover rounded border border-slate-200">
+                                    @endforeach
+                                </div>
+                            @endif
+                            <input type="file" name="images[]" id="images" multiple accept="image/jpeg,image/png,image/jpg,image/gif,image/webp"
+                                class="w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-[#fa8900] file:text-white file:font-medium hover:file:bg-[#e67d00]">
+                            <p class="text-xs text-slate-500 mt-1">Upload new images to replace current ones. At least 3 required when uploading. Formats: JPG, PNG, GIF, WebP.</p>
+                            @error('images')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                            @error('images.*')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="col-span-2 border-t border-slate-100 pt-4 mt-2">

@@ -1,3 +1,10 @@
+@php
+    $productImages = is_string($product->images) ? json_decode($product->images, true) : $product->images;
+    $hasProductImages = !empty($productImages) && count($productImages) > 0;
+    $mainImageUrl = $hasProductImages
+        ? asset('storage/' . $productImages[0])
+        : ($product->category && $product->category->image ? asset('storage/' . $product->category->image) : 'https://via.placeholder.com/600?text=' . urlencode($product->name));
+@endphp
 <x-app-layout>
     <div class="max-w-[1400px] mx-auto px-4 py-8 bg-white min-h-screen">
         <!-- Breadcrumb (Optional) -->
@@ -10,7 +17,7 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
             <!-- Left Column: Images (Gallery) -->
             <div class="md:col-span-5 lg:col-span-4"
-                x-data="{ activeImage: '{{ !empty($product->images) && count($product->images) > 0 ? Storage::url($product->images[0]) : 'https://via.placeholder.com/600' }}' }">
+                x-data="{ activeImage: '{{ $mainImageUrl }}' }">
                 <!-- Main Image -->
                 <div
                     class="aspect-square bg-slate-50 rounded-xl overflow-hidden mb-4 border border-slate-100 relative group">
@@ -20,13 +27,14 @@
                 </div>
 
                 <!-- Thumbnails -->
-                @if(!empty($product->images) && count($product->images) > 1)
+                @if($hasProductImages && count($productImages) > 1)
                     <div class="flex gap-2 overflow-x-auto pb-2 custom-scrollbar">
-                        @foreach($product->images as $image)
-                            <button @click="activeImage = '{{ Storage::url($image) }}'"
+                        @foreach($productImages as $image)
+                            @php $imgUrl = asset('storage/' . $image); @endphp
+                            <button @click="activeImage = '{{ $imgUrl }}'"
                                 class="w-16 h-16 flex-shrink-0 rounded-md border-2 overflow-hidden hover:border-[#fa8900] transition-all"
-                                :class="activeImage === '{{ Storage::url($image) }}' ? 'border-[#fa8900]' : 'border-slate-200'">
-                                <img src="{{ Storage::url($image) }}" class="w-full h-full object-cover">
+                                :class="activeImage === '{{ $imgUrl }}' ? 'border-[#fa8900]' : 'border-slate-200'">
+                                <img src="{{ $imgUrl }}" class="w-full h-full object-cover">
                             </button>
                         @endforeach
                     </div>
@@ -77,13 +85,14 @@
                 <div class="py-4 border-y border-slate-100">
                     <h3 class="text-sm font-semibold text-slate-900 mb-2">Color: <span
                             class="font-normal text-slate-600">Samsung Variant</span></h3>
-                    @if(!empty($product->images) && count($product->images) > 0)
+                    @if($hasProductImages)
                         <div class="flex flex-wrap gap-2">
-                            @foreach($product->images as $image)
-                                <button @click="activeImage = '{{ Storage::url($image) }}'"
+                            @foreach($productImages as $image)
+                                @php $imgUrl = asset('storage/' . $image); @endphp
+                                <button @click="activeImage = '{{ $imgUrl }}'"
                                     class="w-12 h-12 rounded-lg border-2 p-0.5 bg-slate-50 relative overflow-hidden transition-all"
-                                    :class="activeImage === '{{ Storage::url($image) }}' ? 'border-[#fa8900]' : 'border-slate-200 hover:border-slate-300'">
-                                    <img src="{{ Storage::url($image) }}" class="w-full h-full object-cover rounded-md">
+                                    :class="activeImage === '{{ $imgUrl }}' ? 'border-[#fa8900]' : 'border-slate-200 hover:border-slate-300'">
+                                    <img src="{{ $imgUrl }}" class="w-full h-full object-cover rounded-md">
                                     @if($loop->first)
                                         <div
                                             class="absolute -top-2 -right-2 bg-red-600 text-white text-[9px] px-1.5 py-0.5 rounded-full transform scale-75">
@@ -199,7 +208,9 @@
                 @foreach($relatedProducts as $related)
                     @php
                         $rImages = is_string($related->images) ? json_decode($related->images, true) : $related->images;
-                        $rMainImage = !empty($rImages) && count($rImages) > 0 ? Storage::url($rImages[0]) : 'https://via.placeholder.com/300x300?text=No+Image';
+                        $rMainImage = !empty($rImages) && count($rImages) > 0
+                            ? asset('storage/' . $rImages[0])
+                            : ($related->category && $related->category->image ? asset('storage/' . $related->category->image) : 'https://via.placeholder.com/300x300?text=No+Image');
                     @endphp
 
                     <a href="{{ route('product.show', $related->id) }}"

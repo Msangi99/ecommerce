@@ -10,7 +10,7 @@
             </div>
 
             <div class="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
-                <form action="{{ route('admin.stock.store-purchase') }}" method="POST">
+                <form action="{{ route('admin.stock.store-purchase') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -72,6 +72,20 @@
                         <div class="col-span-2">
                             <label for="total_amount" class="block text-sm font-medium text-slate-700 mb-1">Total Purchase Value</label>
                             <input type="text" id="total_amount" readonly class="w-full rounded-md border-slate-300 bg-slate-100 shadow-sm cursor-not-allowed font-bold text-gray-700">
+                        </div>
+
+                        <!-- Product Images (for home page & product details) -->
+                        <div class="col-span-2">
+                            <label for="images" class="block text-sm font-medium text-slate-700 mb-1">Product Images (min 3)</label>
+                            <input type="file" name="images[]" id="images" multiple accept="image/jpeg,image/png,image/jpg,image/gif,image/webp"
+                                class="w-full rounded-md border-slate-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:bg-[#fa8900] file:text-white file:font-medium hover:file:bg-[#e67d00]">
+                            <p class="text-xs text-slate-500 mt-1">Upload at least 3 images for product cards and product details. Formats: JPG, PNG, GIF, WebP. Max 5MB each.</p>
+                            @error('images')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
+                            @error('images.*')
+                                <span class="text-red-500 text-xs">{{ $message }}</span>
+                            @enderror
                         </div>
 
                         <div class="col-span-2 border-t border-slate-100 pt-4 mt-2">
